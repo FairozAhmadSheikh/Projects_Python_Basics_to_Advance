@@ -1,8 +1,8 @@
 import tkinter as tk
 import time
 
-# def update_time():
-#     """Update the clock display every second."""
+def update_time():
+    """Update the clock display every second."""
     current_time = time.strftime("%H:%M:%S %p")
     label.config(text=current_time)
     label.after(1000, update_time)  # Update every 1 second
