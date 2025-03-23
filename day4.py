@@ -7,5 +7,5 @@ def text_to_speech(text):
     engine.runAndWait()
 
 # Get user input
-text = input("Enter text to convert to speech: ")
+# text = input("Enter text to convert to speech: ")
 text_to_speech(text)
