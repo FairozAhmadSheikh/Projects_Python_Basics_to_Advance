@@ -18,4 +18,4 @@ def get_weather(city):
 
 # Get city from user
 city_name = input("Enter city name: ")
-# get_weather(city_name)
+get_weather(city_name)
