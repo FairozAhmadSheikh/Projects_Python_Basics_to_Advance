@@ -60,15 +60,15 @@ class CurrentAccount(Account):
     def __str__(self):
         return f"Current Account - {super().__str__()}, Overdraft Limit: {self._overdraft_limit}"
 
-# # Example Usage
-# if __name__ == "__main__":
-#     sa = SavingsAccount("Alice", 1000)
-#     sa.deposit(500)
-#     sa.apply_interest()
-#     print(sa)
-#     print("Transaction History:", sa.get_transaction_history())
+# Example Usage
+if __name__ == "__main__":
+    sa = SavingsAccount("Alice", 1000)
+    sa.deposit(500)
+    sa.apply_interest()
+    print(sa)
+    print("Transaction History:", sa.get_transaction_history())
     
-#     ca = CurrentAccount("Bob", 300, 1000)
-#     ca.withdraw(1200)
-#     print(ca)
-#     print("Transaction History:", ca.get_transaction_history())
+    ca = CurrentAccount("Bob", 300, 1000)
+    ca.withdraw(1200)
+    print(ca)
+    print("Transaction History:", ca.get_transaction_history())
