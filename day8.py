@@ -68,16 +68,16 @@ if __name__ == "__main__":
     book1 = Book("1984", "George Orwell", "1234567890")
     book2 = Book("To Kill a Mockingbird", "Harper Lee", "0987654321")
     
-    # lib.add_book(book1)
-    # lib.add_book(book2)
+    lib.add_book(book1)
+    lib.add_book(book2)
     
-    # member1 = Member("Alice", 1)
-    # lib.add_member(member1)
+    member1 = Member("Alice", 1)
+    lib.add_member(member1)
     
-    # member1.borrow_book(book1)
-    # print(book1)
+    member1.borrow_book(book1)
+    print(book1)
     
-    # member1.return_book(book1)
-    # print(book1)
+    member1.return_book(book1)
+    print(book1)
     
-    # print("Library Books:", lib.list_books())
+    print("Library Books:", lib.list_books())
