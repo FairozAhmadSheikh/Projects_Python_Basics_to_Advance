@@ -27,3 +27,5 @@ def get_movie_recommendations(movie_name, movies_df, similarity_matrix):
     """Returns a list of recommended movies based on a given movie."""
     if movie_name not in movies_df['Movie'].values:
         return "Movie not found in the database."
+    # movie recomend system
+    
