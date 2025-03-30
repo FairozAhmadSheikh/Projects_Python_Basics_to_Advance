@@ -40,3 +40,8 @@ def main():
     
     print("Available Movies:")
     print(movies_df[['Movie', 'Genre']].to_string(index=False))
+    movie_name = input("Enter a movie name for recommendations: ")
+    recommendations = get_movie_recommendations(movie_name, movies_df, similarity_matrix)
+    
+    if isinstance(recommendations, str):
+        print(recommendations)
