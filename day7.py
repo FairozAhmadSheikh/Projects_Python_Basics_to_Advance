@@ -15,3 +15,10 @@ def load_movie_data():
         ]
     }
     return pd.DataFrame(data)
+
+def compute_similarity(movies_df):
+    """Computes cosine similarity matrix based on genres."""
+    tfidf = TfidfVectorizer(stop_words='english')
+    genre_matrix = tfidf.fit_transform(movies_df['Genre'])
+    similarity_matrix = cosine_similarity(genre_matrix)
+    return similarity_matrix
