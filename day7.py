@@ -45,3 +45,10 @@ def main():
     
     if isinstance(recommendations, str):
         print(recommendations)
+    else:
+        print("Recommended Movies:")
+        for movie in recommendations:
+            print(movie)
+
+if __name__ == "__main__":
+    main()
