@@ -22,3 +22,8 @@ def compute_similarity(movies_df):
     genre_matrix = tfidf.fit_transform(movies_df['Genre'])
     similarity_matrix = cosine_similarity(genre_matrix)
     return similarity_matrix
+
+def get_movie_recommendations(movie_name, movies_df, similarity_matrix):
+    """Returns a list of recommended movies based on a given movie."""
+    if movie_name not in movies_df['Movie'].values:
+        return "Movie not found in the database."
