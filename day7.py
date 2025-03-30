@@ -28,4 +28,9 @@ def get_movie_recommendations(movie_name, movies_df, similarity_matrix):
     if movie_name not in movies_df['Movie'].values:
         return "Movie not found in the database."
     # movie recomend system
+    index = movies_df[movies_df['Movie'] == movie_name].index[0]
+    scores = list(enumerate(similarity_matrix[index]))
+    scores = sorted(scores, key=lambda x: x[1], reverse=True)
+    recommended_movies = [movies_df.iloc[i[0]]['Movie'] for i in scores[1:6]]
     
+    return recommended_movies
