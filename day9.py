@@ -37,3 +37,12 @@ def delete_task(collection):
         print("Task deleted successfully!")
     else:
         print("Task not found.")
+def main():
+    collection = connect_db()
+    while True:
+        print("\nTask Manager")
+        print("1. Add Task")
+        print("2. View Tasks")
+        print("3. Update Task")
+        print("4. Delete Task")
+        print("5. Exit")
