@@ -46,3 +46,16 @@ def main():
         print("3. Update Task")
         print("4. Delete Task")
         print("5. Exit")
+        choice = input("Enter choice: ")
+        if choice == "1":
+            add_task(collection)
+        elif choice == "2":
+            view_tasks(collection)
+        elif choice == "3":
+            update_task(collection)
+        elif choice == "4":
+            delete_task(collection)
+        elif choice == "5":
+            break
+        else:
+            print("Invalid choice. Try again.")
