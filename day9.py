@@ -19,3 +19,12 @@ def view_tasks(collection):
     tasks = collection.find()
     for task in tasks:
         print(f"Title: {task['title']}, Due Date: {task['due_date']}, Description: {task['description']}")
+def update_task(collection):
+    """Updates an existing task."""
+    title = input("Enter task title to update: ")
+    new_description = input("Enter new description: ")
+    result = collection.update_one({"title": title}, {"$set": {"description": new_description}})
+    if result.modified_count:
+        print("Task updated successfully!")
+    else:
+        print("Task not found.")
