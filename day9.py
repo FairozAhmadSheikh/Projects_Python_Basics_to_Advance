@@ -28,3 +28,12 @@ def update_task(collection):
         print("Task updated successfully!")
     else:
         print("Task not found.")
+
+def delete_task(collection):
+    """Deletes a task from the database."""
+    title = input("Enter task title to delete: ")
+    result = collection.delete_one({"title": title})
+    if result.deleted_count:
+        print("Task deleted successfully!")
+    else:
+        print("Task not found.")
