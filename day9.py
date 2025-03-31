@@ -14,3 +14,8 @@ def add_task(collection):
     task = {"title": title, "description": description, "due_date": due_date, "created_at": datetime.now()}
     collection.insert_one(task)
     print("Task added successfully!")
+def view_tasks(collection):
+    """Displays all tasks."""
+    tasks = collection.find()
+    for task in tasks:
+        print(f"Title: {task['title']}, Due Date: {task['due_date']}, Description: {task['description']}")
