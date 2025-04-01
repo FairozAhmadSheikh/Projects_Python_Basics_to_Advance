@@ -48,3 +48,7 @@ def predict(X, weights_input_hidden, weights_hidden_output):
     hidden_layer_output = sigmoid(hidden_layer_input)
     output_layer_input = np.dot(hidden_layer_output, weights_hidden_output)
     return sigmoid(output_layer_input)
+def main():
+    print("Training XOR Neural Network...")
+    X, y = generate_dataset(1000)
+    weights_input_hidden, weights_hidden_output = train_neural_network(X, y)
