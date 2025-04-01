@@ -55,3 +55,9 @@ def main():
         # Test the model
     test_data = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
     predictions = predict(test_data, weights_input_hidden, weights_hidden_output)
+    print("\nPredictions for XOR:")
+    for i, test in enumerate(test_data):
+        print(f"Input: {test}, Output: {round(predictions[i][0])}")
+
+if __name__ == "__main__":
+    main()
