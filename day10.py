@@ -40,3 +40,11 @@ def train_neural_network(X, y, epochs=10000, learning_rate=0.1):
         if epoch % 1000 == 0:
             loss = np.mean(np.abs(error))
             print(f"Epoch {epoch}, Loss: {loss}")
+        return weights_input_hidden, weights_hidden_output
+
+def predict(X, weights_input_hidden, weights_hidden_output):
+    """Makes predictions using the trained neural network."""
+    hidden_layer_input = np.dot(X, weights_input_hidden)
+    hidden_layer_output = sigmoid(hidden_layer_input)
+    output_layer_input = np.dot(hidden_layer_output, weights_hidden_output)
+    return sigmoid(output_layer_input)
