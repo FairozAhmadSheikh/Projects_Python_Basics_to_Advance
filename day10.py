@@ -33,3 +33,10 @@ def train_neural_network(X, y, epochs=10000, learning_rate=0.1):
         # Backpropagation
         d_output = error * sigmoid_derivative(output)
         d_hidden = d_output.dot(weights_hidden_output.T) * sigmoid_derivative(hidden_layer_output)
+              # Update weights
+        weights_hidden_output += hidden_layer_output.T.dot(d_output) * learning_rate
+        weights_input_hidden += X.T.dot(d_hidden) * learning_rate
+        
+        if epoch % 1000 == 0:
+            loss = np.mean(np.abs(error))
+            print(f"Epoch {epoch}, Loss: {loss}")
