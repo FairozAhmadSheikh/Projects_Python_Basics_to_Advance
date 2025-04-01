@@ -28,3 +28,5 @@ def train_neural_network(X, y, epochs=10000, learning_rate=0.1):
         hidden_layer_output = sigmoid(hidden_layer_input)
         output_layer_input = np.dot(hidden_layer_output, weights_hidden_output)
         output = sigmoid(output_layer_input)
+        # Compute error
+        error = y - output
