@@ -52,3 +52,6 @@ def main():
     print("Training XOR Neural Network...")
     X, y = generate_dataset(1000)
     weights_input_hidden, weights_hidden_output = train_neural_network(X, y)
+        # Test the model
+    test_data = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+    predictions = predict(test_data, weights_input_hidden, weights_hidden_output)
