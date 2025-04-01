@@ -30,3 +30,6 @@ def train_neural_network(X, y, epochs=10000, learning_rate=0.1):
         output = sigmoid(output_layer_input)
         # Compute error
         error = y - output
+        # Backpropagation
+        d_output = error * sigmoid_derivative(output)
+        d_hidden = d_output.dot(weights_hidden_output.T) * sigmoid_derivative(hidden_layer_output)
