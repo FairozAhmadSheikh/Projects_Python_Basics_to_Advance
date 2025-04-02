@@ -74,3 +74,10 @@ def display_maze(maze, path=[]):
     cv2.imshow("Maze", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    def main():
+    maze = generate_maze(20)
+    path = solve_maze(maze)
+    display_maze(maze, path)
+
+if __name__ == "__main__":
+    main()
