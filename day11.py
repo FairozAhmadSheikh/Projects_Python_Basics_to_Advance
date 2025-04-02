@@ -46,3 +46,31 @@ def neighbors(pos):
         nx, ny = x + dx, y + dy
         if 0 <= nx < size and 0 <= ny < size and maze[nx, ny] == 255:
             yield (nx, ny)
+    while open_set:
+current = min(open_set, key=lambda x: f_score.get(x, float('inf')))
+if current == end:
+path = []
+while current in came_from:
+    path.append(current)
+    current = came_from[current]
+    path.append(start)
+        return path[::-1]
+
+open_set.remove(current)
+for neighbor in neighbors(current):
+temp_g_score = g_score[current] + 1
+if temp_g_score < g_score.get(neighbor, float('inf')):
+    came_from[neighbor] = current
+    g_score[neighbor] = temp_g_score
+    f_score[neighbor] = temp_g_score + abs(end[0] - neighbor[0]) + abs(end[1] - neighbor[1])
+    open_set.add(neighbor)
+return []
+def display_maze(maze, path=[]):
+    """Displays the maze and solution using OpenCV."""
+    size = maze.shape[0] * 10
+    img = cv2.resize(maze, (size, size), interpolation=cv2.INTER_NEAREST)
+    for (x, y) in path:
+        cv2.circle(img, (y * 10 + 5, x * 10 + 5), 3, (0, 0, 255), -1)
+    cv2.imshow("Maze", img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
