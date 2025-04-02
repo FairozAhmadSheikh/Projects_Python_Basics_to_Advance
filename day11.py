@@ -29,3 +29,6 @@ def generate_maze(size=20):
                     maze[i, wx] = 0
             divide(x, y, wx - x, height)
             divide(wx + 1, y, x + width - wx - 1, height)
+        divide(0, 0, size, size)
+        maze[1, 0] = maze[size - 2, size - 1] = 255  # Entrance and exit
+        return maze
