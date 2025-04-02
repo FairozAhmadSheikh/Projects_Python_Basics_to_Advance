@@ -40,3 +40,9 @@ def solve_maze(maze):
     came_from = {}
     g_score = {start: 0}
     f_score = {start: abs(end[0] - start[0]) + abs(end[1] - start[1])}
+def neighbors(pos):
+    x, y = pos
+    for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < size and 0 <= ny < size and maze[nx, ny] == 255:
+            yield (nx, ny)
