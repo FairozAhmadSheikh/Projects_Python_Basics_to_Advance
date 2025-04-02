@@ -32,3 +32,11 @@ def generate_maze(size=20):
         divide(0, 0, size, size)
         maze[1, 0] = maze[size - 2, size - 1] = 255  # Entrance and exit
         return maze
+def solve_maze(maze):
+    """Solves the maze using A* algorithm."""
+    size = maze.shape[0]
+    start, end = (1, 0), (size - 2, size - 1)
+    open_set = {start}
+    came_from = {}
+    g_score = {start: 0}
+    f_score = {start: abs(end[0] - start[0]) + abs(end[1] - start[1])}
