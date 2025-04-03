@@ -46,3 +46,9 @@ def move(self):
             self.score += 1
         else:
             self.snake.pop()
+            def draw(self):
+                screen.fill(BLACK)
+                for segment in self.snake:
+                pygame.draw.rect(screen, GREEN, (*segment, GRID_SIZE, GRID_SIZE))
+                pygame.draw.rect(screen, RED, (*self.food, GRID_SIZE, GRID_SIZE))
+                pygame.display.flip()
