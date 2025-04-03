@@ -72,3 +72,9 @@ def move(self):
         game.move()
         game.draw()
         clock.tick(10)
+        print(f"Game Over! Your Score: {game.score}")
+    time.sleep(2)
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
