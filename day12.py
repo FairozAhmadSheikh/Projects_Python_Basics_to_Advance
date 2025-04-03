@@ -65,3 +65,10 @@ def move(self):
                     self.direction = (-GRID_SIZE, 0)
                 elif event.key == pygame.K_RIGHT and self.direction != (-GRID_SIZE, 0):
                     self.direction = (GRID_SIZE, 0)
+                    def main():
+    game = SnakeGame()
+    while game.running:
+        game.handle_events()
+        game.move()
+        game.draw()
+        clock.tick(10)
