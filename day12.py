@@ -52,3 +52,16 @@ def move(self):
                 pygame.draw.rect(screen, GREEN, (*segment, GRID_SIZE, GRID_SIZE))
                 pygame.draw.rect(screen, RED, (*self.food, GRID_SIZE, GRID_SIZE))
                 pygame.display.flip()
+                def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP and self.direction != (0, GRID_SIZE):
+                    self.direction = (0, -GRID_SIZE)
+                elif event.key == pygame.K_DOWN and self.direction != (0, -GRID_SIZE):
+                    self.direction = (0, GRID_SIZE)
+                elif event.key == pygame.K_LEFT and self.direction != (GRID_SIZE, 0):
+                    self.direction = (-GRID_SIZE, 0)
+                elif event.key == pygame.K_RIGHT and self.direction != (-GRID_SIZE, 0):
+                    self.direction = (GRID_SIZE, 0)
