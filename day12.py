@@ -8,15 +8,18 @@ pygame.init()
 # Screen dimensions
 WIDTH, HEIGHT = 800, 600
 GRID_SIZE = 20
+
 # Colors
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
+
 # Initialize screen
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Snake Game")
 clock = pygame.time.Clock()
+
 class SnakeGame:
     def __init__(self):
         self.snake = [(100, 100), (90, 100), (80, 100)]
@@ -31,7 +34,8 @@ class SnakeGame:
                     random.randint(0, (HEIGHT // GRID_SIZE) - 1) * GRID_SIZE)
             if food not in self.snake:
                 return food
-def move(self):
+
+    def move(self):
         new_head = (self.snake[0][0] + self.direction[0], self.snake[0][1] + self.direction[1])
         
         if (new_head[0] < 0 or new_head[0] >= WIDTH or
@@ -46,13 +50,15 @@ def move(self):
             self.score += 1
         else:
             self.snake.pop()
-            def draw(self):
-                screen.fill(BLACK)
-                for segment in self.snake:
-                pygame.draw.rect(screen, GREEN, (*segment, GRID_SIZE, GRID_SIZE))
-                pygame.draw.rect(screen, RED, (*self.food, GRID_SIZE, GRID_SIZE))
-                pygame.display.flip()
-                def handle_events(self):
+
+    def draw(self):
+        screen.fill(BLACK)
+        for segment in self.snake:
+            pygame.draw.rect(screen, GREEN, (*segment, GRID_SIZE, GRID_SIZE))
+        pygame.draw.rect(screen, RED, (*self.food, GRID_SIZE, GRID_SIZE))
+        pygame.display.flip()
+
+    def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -65,14 +71,16 @@ def move(self):
                     self.direction = (-GRID_SIZE, 0)
                 elif event.key == pygame.K_RIGHT and self.direction != (-GRID_SIZE, 0):
                     self.direction = (GRID_SIZE, 0)
-                    def main():
+
+def main():
     game = SnakeGame()
     while game.running:
         game.handle_events()
         game.move()
         game.draw()
         clock.tick(10)
-        print(f"Game Over! Your Score: {game.score}")
+    
+    print(f"Game Over! Your Score: {game.score}")
     time.sleep(2)
     pygame.quit()
 
