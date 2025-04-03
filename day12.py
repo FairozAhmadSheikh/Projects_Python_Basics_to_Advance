@@ -31,3 +31,18 @@ class SnakeGame:
                     random.randint(0, (HEIGHT // GRID_SIZE) - 1) * GRID_SIZE)
             if food not in self.snake:
                 return food
+def move(self):
+        new_head = (self.snake[0][0] + self.direction[0], self.snake[0][1] + self.direction[1])
+        
+        if (new_head[0] < 0 or new_head[0] >= WIDTH or
+                new_head[1] < 0 or new_head[1] >= HEIGHT or
+                new_head in self.snake):
+            self.running = False
+            return
+        
+        self.snake.insert(0, new_head)
+        if new_head == self.food:
+            self.food = self.spawn_food()
+            self.score += 1
+        else:
+            self.snake.pop()
