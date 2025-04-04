@@ -72,3 +72,51 @@ class Bullet:
 
     def draw(self):
         screen.blit(bullet_img, (self.x, self.y))
+# Collision detection
+def is_collision(obj1, obj2):
+    distance = math.sqrt((obj1.x - obj2.x) ** 2 + (obj1.y - obj2.y) ** 2)
+    return distance < 30
+
+def main():
+    running = True
+    clock = pygame.time.Clock()
+    player = Player()
+    enemies = [Enemy() for _ in range(5)]
+    score = 0
+
+    while running:
+        screen.fill(BLACK)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            player.move(-1)
+        if keys[pygame.K_RIGHT]:
+            player.move(1)
+        if keys[pygame.K_SPACE]:
+            player.shoot()
+        
+        for enemy in enemies:
+            enemy.move()
+            enemy.draw()
+        
+        for bullet in player.bullets:
+            bullet.move()
+            if not bullet.active:
+                player.bullets.remove(bullet)
+        
+        for enemy in enemies[:]:
+            for bullet in player.bullets[:]:
+                if is_collision(enemy, bullet):
+                    enemies.remove(enemy)
+                    player.bullets.remove(bullet)
+                    score += 1
+                    break
+        
+        player.draw()
+        pygame.display.update()
+        clock.tick(60)
+    
+    pygame.quit()
