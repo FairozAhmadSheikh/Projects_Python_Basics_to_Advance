@@ -15,3 +15,8 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
+
+# Load assets
+player_img = pygame.image.load("player.png")
+enemy_img = pygame.image.load("enemy.png")
+bullet_img = pygame.image.load("bullet.png")
