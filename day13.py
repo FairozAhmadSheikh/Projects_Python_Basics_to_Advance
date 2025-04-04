@@ -40,3 +40,19 @@ class Player:
         screen.blit(player_img, (self.x, self.y))
         for bullet in self.bullets:
             bullet.draw()
+# Enemy class
+class Enemy:
+    def __init__(self):
+        self.x = random.randint(0, WIDTH - 64)
+        self.y = random.randint(50, 150)
+        self.speed = 3
+        self.direction = 1
+
+    def move(self):
+        self.x += self.speed * self.direction
+        if self.x <= 0 or self.x >= WIDTH - 64:
+            self.direction *= -1
+            self.y += 40
+
+    def draw(self):
+        screen.blit(enemy_img, (self.x, self.y))
