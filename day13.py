@@ -56,3 +56,19 @@ class Enemy:
 
     def draw(self):
         screen.blit(enemy_img, (self.x, self.y))
+
+# Bullet class
+class Bullet:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.speed = -7
+        self.active = True
+
+    def move(self):
+        self.y += self.speed
+        if self.y < 0:
+            self.active = False
+
+    def draw(self):
+        screen.blit(bullet_img, (self.x, self.y))
