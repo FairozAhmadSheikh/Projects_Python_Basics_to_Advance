@@ -37,3 +37,11 @@ def handle_client(client):
             client.close()
             broadcast(f"{username} has left the chat.", None)
             break
+# Broadcast messages to all clients
+def broadcast(message, sender):
+    for client in clients:
+        if client != sender:
+            try:
+                client.send(message.encode('utf-8'))
+            except:
+                pass
