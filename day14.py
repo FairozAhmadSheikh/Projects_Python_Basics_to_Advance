@@ -61,3 +61,7 @@ def main():
         username = client.recv(BUFFER_SIZE).decode('utf-8')
         usernames.append(username)
         clients.append(client)
+        
+        print(f"Username is {username}")
+        broadcast(f"{username} has joined the chat!", client)
+        client.send("Connected to the server!".encode('utf-8'))
