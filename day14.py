@@ -29,3 +29,11 @@ def handle_client(client):
                 broadcast(f"[File Received] {filename}", client)
             else:
                 broadcast(message, client)
+        except:
+            index = clients.index(client)
+            clients.remove(client)
+            username = usernames[index]
+            usernames.remove(username)
+            client.close()
+            broadcast(f"{username} has left the chat.", None)
+            break
