@@ -52,3 +52,12 @@ def main():
     server.bind((HOST, PORT))
     server.listen()
     print(f"[SERVER STARTED] Listening on {HOST}:{PORT}")
+
+    while True:
+        client, address = server.accept()
+        print(f"[NEW CONNECTION] {address} connected.")
+
+        client.send("USERNAME".encode('utf-8'))
+        username = client.recv(BUFFER_SIZE).decode('utf-8')
+        usernames.append(username)
+        clients.append(client)
