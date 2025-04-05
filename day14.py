@@ -45,3 +45,10 @@ def broadcast(message, sender):
                 client.send(message.encode('utf-8'))
             except:
                 pass
+
+# Main server function
+def main():
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind((HOST, PORT))
+    server.listen()
+    print(f"[SERVER STARTED] Listening on {HOST}:{PORT}")
