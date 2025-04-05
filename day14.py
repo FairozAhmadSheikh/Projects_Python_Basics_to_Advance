@@ -21,4 +21,11 @@ def handle_client(client):
                 filesize = int(filesize)
                 with open("received_" + filename, "wb") as f:
                     while filesize > 0:
-                        
+                        bytes_read = client.recv(min(BUFFER_SIZE, filesize))
+                        if not bytes_read:
+                            break
+                        f.write(bytes_read)
+                        filesize -= len(bytes_read)
+                broadcast(f"[File Received] {filename}", client)
+            else:
+                broadcast(message, client)
