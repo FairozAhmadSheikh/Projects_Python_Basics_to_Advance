@@ -65,3 +65,6 @@ def main():
         print(f"Username is {username}")
         broadcast(f"{username} has joined the chat!", client)
         client.send("Connected to the server!".encode('utf-8'))
+
+        thread = threading.Thread(target=handle_client, args=(client,))
+        thread.start()
