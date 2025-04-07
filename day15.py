@@ -50,3 +50,47 @@ class LibraryApp:
 
         self.setup_ui()
         self.refresh_table()
+    def setup_ui(self):
+        self.frame = tk.Frame(self.root)
+        self.frame.pack(pady=10)
+
+        # Entry fields
+        tk.Label(self.frame, text="Title:").grid(row=0, column=0)
+        self.title_entry = tk.Entry(self.frame)
+        self.title_entry.grid(row=0, column=1)
+
+        tk.Label(self.frame, text="Author:").grid(row=0, column=2)
+        self.author_entry = tk.Entry(self.frame)
+        self.author_entry.grid(row=0, column=3)
+
+        tk.Label(self.frame, text="Genre:").grid(row=1, column=0)
+        self.genre_entry = tk.Entry(self.frame)
+        self.genre_entry.grid(row=1, column=1)
+
+        tk.Label(self.frame, text="Year:").grid(row=1, column=2)
+        self.year_entry = tk.Entry(self.frame)
+        self.year_entry.grid(row=1, column=3)
+
+        # Buttons
+        tk.Button(self.frame, text="Add Book", command=self.add_book).grid(row=2, column=1, pady=10)
+        tk.Button(self.frame, text="Delete Selected", command=self.delete_selected).grid(row=2, column=2)
+
+        # Table
+        self.tree = ttk.Treeview(self.root, columns=("ID", "Title", "Author", "Genre", "Year", "Added"), show='headings')
+        for col in self.tree["columns"]:
+            self.tree.heading(col, text=col)
+            self.tree.column(col, anchor=tk.CENTER)
+        self.tree.pack(fill="both", expand=True)
+
+    def refresh_table(self):
+        for row in self.tree.get_children():
+            self.tree.delete(row)
+        for book in fetch_books():
+            self.tree.insert("", "end", values=book)
+
+    def add_book(self):
+        title = self.title_entry.get()
+        author = self.author_entry.get()
+        genre = self.genre_entry.get()
+        year = self.year_entry.get()
+    
