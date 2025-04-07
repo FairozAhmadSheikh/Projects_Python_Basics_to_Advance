@@ -93,4 +93,28 @@ class LibraryApp:
         author = self.author_entry.get()
         genre = self.genre_entry.get()
         year = self.year_entry.get()
-    
+    if not title or not author or not year:
+            messagebox.showwarning("Input Error", "Title, Author, and Year are required!")
+            return
+
+        try:
+            int(year)
+        except ValueError:
+            messagebox.showerror("Invalid Input", "Year must be an integer.")
+            return
+
+        add_book(title, author, genre, int(year))
+        self.refresh_table()
+        self.title_entry.delete(0, tk.END)
+        self.author_entry.delete(0, tk.END)
+        self.genre_entry.delete(0, tk.END)
+        self.year_entry.delete(0, tk.END)
+
+    def delete_selected(self):
+        selected = self.tree.selection()
+        if not selected:
+            return
+        for item in selected:
+            book_id = self.tree.item(item)['values'][0]
+            delete_book(book_id)
+        self.refresh_table()
