@@ -33,3 +33,11 @@ def delete_book(book_id):
     cur.execute("DELETE FROM books WHERE id = ?", (book_id,))
     conn.commit()
     conn.close()
+# Fetch all books
+def fetch_books():
+    conn = sqlite3.connect("library.db")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM books")
+    books = cur.fetchall()
+    conn.close()
+    return books
