@@ -118,3 +118,8 @@ class LibraryApp:
             book_id = self.tree.item(item)['values'][0]
             delete_book(book_id)
         self.refresh_table()
+if __name__ == '__main__':
+    init_db()
+    root = tk.Tk()
+    app = LibraryApp(root)
+    root.mainloop()
