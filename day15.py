@@ -26,3 +26,10 @@ def add_book(title, author, genre, year):
                 (title, author, genre, year, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
     conn.commit()
     conn.close()
+# Delete book
+def delete_book(book_id):
+    conn = sqlite3.connect("library.db")
+    cur = conn.cursor()
+    cur.execute("DELETE FROM books WHERE id = ?", (book_id,))
+    conn.commit()
+    conn.close()
