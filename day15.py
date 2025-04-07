@@ -18,3 +18,11 @@ def init_db():
     """)
     conn.commit()
     conn.close()
+# Add book
+def add_book(title, author, genre, year):
+    conn = sqlite3.connect("library.db")
+    cur = conn.cursor()
+    cur.execute("INSERT INTO books (title, author, genre, year, added_on) VALUES (?, ?, ?, ?, ?)",
+                (title, author, genre, year, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    conn.commit()
+    conn.close()
