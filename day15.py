@@ -2,6 +2,7 @@ import sqlite3
 import tkinter as tk
 from tkinter import ttk, messagebox
 import datetime
+
 # Database setup
 def init_db():
     conn = sqlite3.connect("library.db")
@@ -18,6 +19,7 @@ def init_db():
     """)
     conn.commit()
     conn.close()
+
 # Add book
 def add_book(title, author, genre, year):
     conn = sqlite3.connect("library.db")
@@ -26,6 +28,7 @@ def add_book(title, author, genre, year):
                 (title, author, genre, year, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
     conn.commit()
     conn.close()
+
 # Delete book
 def delete_book(book_id):
     conn = sqlite3.connect("library.db")
@@ -33,6 +36,7 @@ def delete_book(book_id):
     cur.execute("DELETE FROM books WHERE id = ?", (book_id,))
     conn.commit()
     conn.close()
+
 # Fetch all books
 def fetch_books():
     conn = sqlite3.connect("library.db")
@@ -41,6 +45,7 @@ def fetch_books():
     books = cur.fetchall()
     conn.close()
     return books
+
 # GUI Class
 class LibraryApp:
     def __init__(self, root):
@@ -50,6 +55,7 @@ class LibraryApp:
 
         self.setup_ui()
         self.refresh_table()
+
     def setup_ui(self):
         self.frame = tk.Frame(self.root)
         self.frame.pack(pady=10)
@@ -93,7 +99,8 @@ class LibraryApp:
         author = self.author_entry.get()
         genre = self.genre_entry.get()
         year = self.year_entry.get()
-    if not title or not author or not year:
+
+        if not title or not author or not year:
             messagebox.showwarning("Input Error", "Title, Author, and Year are required!")
             return
 
@@ -118,6 +125,7 @@ class LibraryApp:
             book_id = self.tree.item(item)['values'][0]
             delete_book(book_id)
         self.refresh_table()
+
 if __name__ == '__main__':
     init_db()
     root = tk.Tk()
