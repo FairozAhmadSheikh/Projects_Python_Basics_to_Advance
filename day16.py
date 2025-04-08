@@ -18,3 +18,14 @@ questions = [
         "options": ["Harper Lee", "Mark Twain", "J.K. Rowling", "Jane Austen"],
         "answer": "Harper Lee"
     },
+       {
+        "question": "What is the largest ocean on Earth?",
+        "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+        "answer": "Pacific"
+    },
+    {
+        "question": "Which element has the chemical symbol 'O'?",
+        "options": ["Oxygen", "Gold", "Osmium", "Oxide"],
+        "answer": "Oxygen"
+    }
+]
