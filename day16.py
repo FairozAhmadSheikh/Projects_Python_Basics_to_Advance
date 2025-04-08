@@ -52,3 +52,15 @@ class QuizApp:
         self.status_label.pack(pady=20)
 
         self.next_question()
+        def next_question(self):
+        if self.q_index < len(questions):
+            self.current_question = questions[self.q_index]
+            self.question_label.config(text=self.current_question["question"])
+            shuffled_options = self.current_question["options"][:]
+            random.shuffle(shuffled_options)
+            for i, option in enumerate(shuffled_options):
+                self.options[i].config(text=option)
+            self.q_index += 1
+        else:
+            messagebox.showinfo("Quiz Completed", f"Your final score is: {self.score}/{len(questions)}")
+            self.master.quit()
