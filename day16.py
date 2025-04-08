@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import random
+
 # Sample questions for the quiz
 questions = [
     {
@@ -18,7 +19,7 @@ questions = [
         "options": ["Harper Lee", "Mark Twain", "J.K. Rowling", "Jane Austen"],
         "answer": "Harper Lee"
     },
-       {
+    {
         "question": "What is the largest ocean on Earth?",
         "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
         "answer": "Pacific"
@@ -29,6 +30,7 @@ questions = [
         "answer": "Oxygen"
     }
 ]
+
 class QuizApp:
     def __init__(self, master):
         self.master = master
@@ -52,7 +54,8 @@ class QuizApp:
         self.status_label.pack(pady=20)
 
         self.next_question()
-        def next_question(self):
+
+    def next_question(self):
         if self.q_index < len(questions):
             self.current_question = questions[self.q_index]
             self.question_label.config(text=self.current_question["question"])
@@ -65,7 +68,7 @@ class QuizApp:
             messagebox.showinfo("Quiz Completed", f"Your final score is: {self.score}/{len(questions)}")
             self.master.quit()
 
-        def check_answer(self, index):
+    def check_answer(self, index):
         selected = self.options[index].cget("text")
         correct = self.current_question["answer"]
         if selected == correct:
@@ -75,7 +78,8 @@ class QuizApp:
             messagebox.showerror("Wrong!", f"The correct answer was: {correct}")
         self.status_label.config(text=f"Score: {self.score}")
         self.next_question()
+
 if __name__ == '__main__':
     root = tk.Tk()
     app = QuizApp(root)
-     root.mainloop()
+    root.mainloop()
