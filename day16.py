@@ -64,3 +64,14 @@ class QuizApp:
         else:
             messagebox.showinfo("Quiz Completed", f"Your final score is: {self.score}/{len(questions)}")
             self.master.quit()
+            
+        def check_answer(self, index):
+        selected = self.options[index].cget("text")
+        correct = self.current_question["answer"]
+        if selected == correct:
+            self.score += 1
+            messagebox.showinfo("Correct!", "You got it right!")
+        else:
+            messagebox.showerror("Wrong!", f"The correct answer was: {correct}")
+        self.status_label.config(text=f"Score: {self.score}")
+        self.next_question()
