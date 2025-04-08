@@ -64,7 +64,7 @@ class QuizApp:
         else:
             messagebox.showinfo("Quiz Completed", f"Your final score is: {self.score}/{len(questions)}")
             self.master.quit()
-            
+
         def check_answer(self, index):
         selected = self.options[index].cget("text")
         correct = self.current_question["answer"]
@@ -75,3 +75,6 @@ class QuizApp:
             messagebox.showerror("Wrong!", f"The correct answer was: {correct}")
         self.status_label.config(text=f"Score: {self.score}")
         self.next_question()
+if __name__ == '__main__':
+    root = tk.Tk()
+    app = QuizApp(root)
