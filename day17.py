@@ -48,3 +48,42 @@ class TodoApp:
         self.task_listbox.pack(pady=10)
 
         self.refresh_task_list()
+    def refresh_task_list(self):
+        self.task_listbox.delete(0, tk.END)
+        for task in self.tasks:
+            status = "✔" if task['completed'] else "✗"
+            self.task_listbox.insert(tk.END, f"{status} {task['task']}")
+
+    def add_task(self):
+        task_text = self.entry.get()
+        if not task_text:
+            messagebox.showwarning("Warning", "Please enter a task.")
+            return
+        self.tasks.append({"id": str(uuid.uuid4()), "task": task_text, "completed": False})
+        save_tasks(self.tasks)
+        self.entry.delete(0, tk.END)
+        self.refresh_task_list()
+
+    def delete_task(self):
+        selected = self.task_listbox.curselection()
+        if not selected:
+            return
+        index = selected[0]
+        del self.tasks[index]
+        save_tasks(self.tasks)
+        self.refresh_task_list()
+
+    def clear_tasks(self):
+        if messagebox.askyesno("Confirm", "Are you sure you want to clear all tasks?"):
+            self.tasks = []
+            save_tasks(self.tasks)
+            self.refresh_task_list()
+
+    def complete_task(self):
+        selected = self.task_listbox.curselection()
+        if not selected:
+            return
+        index = selected[0]
+        self.tasks[index]['completed'] = True
+        save_tasks(self.tasks)
+        self.refresh_task_list()
