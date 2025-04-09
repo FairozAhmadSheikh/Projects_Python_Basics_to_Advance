@@ -87,3 +87,7 @@ class TodoApp:
         self.tasks[index]['completed'] = True
         save_tasks(self.tasks)
         self.refresh_task_list()
+if __name__ == '__main__':
+    root = tk.Tk()
+    app = TodoApp(root)
+    root.mainloop()
