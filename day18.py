@@ -45,3 +45,9 @@ class PomodoroTimer:
             session_type = "Break Time!" if self.is_break else "Focus Session"
             self.session_label.config(text=session_type)
             self.start_timer()
+        def start_timer(self):
+            if not self.is_running:
+                self.is_running = True
+                thread = threading.Thread(target=self.update_timer)
+                thread.daemon = True
+                thread.start()
