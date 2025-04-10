@@ -51,3 +51,9 @@ class PomodoroTimer:
                 thread = threading.Thread(target=self.update_timer)
                 thread.daemon = True
                 thread.start()
+        def reset_timer(self):
+            self.is_running = False
+            self.is_break = False
+            self.remaining = self.session_length
+            self.timer_label.config(text=self.format_time(self.remaining))
+            self.session_label.config(text="Focus Session")
