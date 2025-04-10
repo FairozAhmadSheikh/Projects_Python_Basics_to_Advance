@@ -29,5 +29,19 @@ class PomodoroTimer:
 
         self.session_label = tk.Label(master, text="Focus Session", font=("Arial", 16))
         self.session_label.pack(pady=10)
+    def format_time(self, seconds):
+        mins = seconds // 60
+        secs = seconds % 60
+        return f"{mins:02}:{secs:02}"
 
-    
+    def update_timer(self):
+        while self.is_running and self.remaining > 0:
+            time.sleep(1)
+            self.remaining -= 1
+            self.timer_label.config(text=self.format_time(self.remaining))
+        if self.remaining == 0 and self.is_running:
+            self.is_break = not self.is_break
+            self.remaining = self.break_length if self.is_break else self.session_length
+            session_type = "Break Time!" if self.is_break else "Focus Session"
+            self.session_label.config(text=session_type)
+            self.start_timer()
