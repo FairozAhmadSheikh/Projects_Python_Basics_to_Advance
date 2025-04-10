@@ -57,3 +57,7 @@ class PomodoroTimer:
             self.remaining = self.session_length
             self.timer_label.config(text=self.format_time(self.remaining))
             self.session_label.config(text="Focus Session")
+if __name__ == '__main__':
+    root = tk.Tk()
+    app = PomodoroTimer(root)
+    root.mainloop()
