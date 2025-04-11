@@ -54,3 +54,7 @@ class ImageEditor:
         if self.image:
             self.image = self.image.rotate(90, expand=True)
             self.display_image()
+    def flip_image(self):
+        if self.image:
+            self.image = self.image.transpose(Image.FLIP_LEFT_RIGHT)
+            self.display_image()
