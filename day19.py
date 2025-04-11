@@ -20,3 +20,18 @@ class ImageEditor:
         tk.Button(btn_frame, text="Blur", command=self.blur_image).grid(row=0, column=3, padx=5)
         tk.Button(btn_frame, text="Rotate 90°", command=self.rotate_image).grid(row=0, column=4, padx=5)
         tk.Button(btn_frame, text="Flip Horizontally", command=self.flip_image).grid(row=0, column=5, padx=5)
+    def open_image(self):
+        file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.jpg *.png *.jpeg *.bmp")])
+        if file_path:
+            self.image = Image.open(file_path)
+            self.display_image()
+
+    def save_image(self):
+        if self.image:
+            file_path = filedialog.asksaveasfilename(defaultextension=".png",
+                                                     filetypes=[("PNG files", "*.png"), ("JPEG files", "*.jpg")])
+            if file_path:
+                self.image.save(file_path)
+                messagebox.showinfo("Success", "Image saved successfully!")
+        else:
+            messagebox.showerror("Error", "No image to save.")
