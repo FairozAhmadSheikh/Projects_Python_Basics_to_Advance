@@ -50,3 +50,7 @@ class ImageEditor:
         if self.image:
             self.image = self.image.filter(ImageFilter.BLUR)
             self.display_image()
+    def rotate_image(self):
+        if self.image:
+            self.image = self.image.rotate(90, expand=True)
+            self.display_image()
