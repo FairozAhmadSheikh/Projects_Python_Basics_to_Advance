@@ -58,3 +58,8 @@ class ImageEditor:
         if self.image:
             self.image = self.image.transpose(Image.FLIP_LEFT_RIGHT)
             self.display_image()
+
+if __name__ == '__main__':
+    root = tk.Tk()
+    app = ImageEditor(root)
+    root.mainloop()
