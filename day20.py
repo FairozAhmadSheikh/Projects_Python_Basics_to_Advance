@@ -41,3 +41,14 @@ def add_password():
     }
     save_data(data)
     print(f"🔐 Password for '{service}' added successfully.")
+def view_password():
+    service = input("Enter service to retrieve: ")
+    data = load_data()
+    if service in data:
+        username = decrypt(data[service]["username"])
+        password = decrypt(data[service]["password"])
+        print(f"\n🧾 Service: {service}")
+        print(f"👤 Username: {username}")
+        print(f"🔑 Password: {password}")
+    else:
+        print("❌ Service not found.")
