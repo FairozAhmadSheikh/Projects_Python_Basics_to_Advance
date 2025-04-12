@@ -52,3 +52,12 @@ def view_password():
         print(f"🔑 Password: {password}")
     else:
         print("❌ Service not found.")
+def delete_password():
+    service = input("Enter service to delete: ")
+    data = load_data()
+    if service in data:
+        del data[service]
+        save_data(data)
+        print(f"🗑️ Deleted '{service}' entry.")
+    else:
+        print("❌ Service not found.")
