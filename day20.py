@@ -61,3 +61,31 @@ def delete_password():
         print(f"🗑️ Deleted '{service}' entry.")
     else:
         print("❌ Service not found.")
+def main():
+    print("\n🔐 Secure Password Vault 🔐")
+    master_pwd = getpass.getpass("Enter Master Password: ")
+    
+    # You can implement a hashed check here if you want
+    if master_pwd != "admin123":  # CHANGE THIS in real apps
+        print("❌ Wrong password.")
+        return
+
+    while True:
+        print("\n--- MENU ---")
+        print("1. Add New Password")
+        print("2. View Password")
+        print("3. Delete Password")
+        print("4. Exit")
+
+        choice = input("Choose an option: ")
+        if choice == '1':
+            add_password()
+        elif choice == '2':
+            view_password()
+        elif choice == '3':
+            delete_password()
+        elif choice == '4':
+            print("👋 Exiting Password Manager.")
+            break
+        else:
+            print("❗ Invalid choice.")
