@@ -29,3 +29,15 @@ def encrypt(text):
 
 def decrypt(token):
     return fernet.decrypt(token.encode()).decode()
+def add_password():
+    service = input("Enter service name: ")
+    username = input("Enter username/email: ")
+    password = getpass.getpass("Enter password: ")
+
+    data = load_data()
+    data[service] = {
+        "username": encrypt(username),
+        "password": encrypt(password)
+    }
+    save_data(data)
+    print(f"🔐 Password for '{service}' added successfully.")
