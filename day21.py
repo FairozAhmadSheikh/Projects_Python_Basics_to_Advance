@@ -69,3 +69,5 @@ def main():
     def stop():
         tracker.stop_tracking()
         status_label.config(text="Tracking stopped.")
+if __name__ == "__main__":
+    main()
