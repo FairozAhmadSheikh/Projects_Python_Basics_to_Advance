@@ -52,3 +52,20 @@ def main():
     def stop():
         tracker.stop_tracking()
         status_label.config(text="Tracking stopped.")
+    # ---------- GUI ----------
+def main():
+    tracker = LocationTracker()
+
+    root = tk.Tk()
+    root.title("📍 Real-Time Location Tracker")
+    root.geometry("300x180")
+
+    tk.Label(root, text="Track your IP-based location", font=("Arial", 12)).pack(pady=10)
+
+    def start():
+        status_label.config(text="Tracking started...")
+        tracker.start_tracking()
+
+    def stop():
+        tracker.stop_tracking()
+        status_label.config(text="Tracking stopped.")
