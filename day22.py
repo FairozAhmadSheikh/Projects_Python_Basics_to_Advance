@@ -75,3 +75,9 @@ def predict(X):
 
 # Run training
 train(epochs=1000, lr=0.1)
+
+# Evaluate
+predictions = predict(X_test)
+true_labels = np.argmax(y_test, axis=1)
+accuracy = np.mean(predictions == true_labels)
+print(f"🧠 Test Accuracy: {accuracy * 100:.2f}%")
