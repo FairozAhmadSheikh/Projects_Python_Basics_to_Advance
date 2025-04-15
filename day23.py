@@ -72,3 +72,6 @@ def run_jarvis():
 
         else:
             speak("I didn't understand. Please try again.")
+
+if __name__ == "__main__":
+    run_jarvis()
