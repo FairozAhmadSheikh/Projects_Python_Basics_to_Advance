@@ -36,3 +36,39 @@ def take_command():
         print("❌ Sorry, say that again...")
         return "None"
     return query.lower()
+
+def run_jarvis():
+    wish_user()
+    while True:
+        query = take_command()
+
+        if "wikipedia" in query:
+            import wikipedia
+            speak("Searching Wikipedia...")
+            query = query.replace("wikipedia", "")
+            results = wikipedia.summary(query, sentences=2)
+            speak("According to Wikipedia")
+            speak(results)
+
+        elif "open youtube" in query:
+            webbrowser.open("https://youtube.com")
+
+        elif "open google" in query:
+            webbrowser.open("https://google.com")
+
+        elif "time" in query:
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")
+            speak(f"The time is {strTime}")
+
+        elif "open notepad" in query:
+            os.system("notepad")
+
+        elif "open calculator" in query:
+            os.system("calc")
+
+        elif "exit" in query or "stop" in query:
+            speak("Goodbye!")
+            break
+
+        else:
+            speak("I didn't understand. Please try again.")
