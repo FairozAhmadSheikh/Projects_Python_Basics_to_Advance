@@ -18,3 +18,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y_encoded, test_size=0.2)
 input_size = 64      # 8x8 images
 hidden_size = 32
 output_size = 10     # digits 0-9
+np.random.seed(42)
+W1 = np.random.randn(input_size, hidden_size)
+b1 = np.zeros((1, hidden_size))
+W2 = np.random.randn(hidden_size, output_size)
+b2 = np.zeros((1, output_size))
+
+# Activation functions
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def softmax(x):
+    exps = np.exp(x - np.max(x, axis=1, keepdims=True))
+    return exps / np.sum(exps, axis=1, keepdims=True)
