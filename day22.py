@@ -67,3 +67,11 @@ def train(epochs=1000, lr=0.1):
 
         if epoch % 100 == 0:
             print(f"Epoch {epoch} | Loss: {loss:.4f}")
+            # Prediction
+def predict(X):
+    a1 = sigmoid(X @ W1 + b1)
+    a2 = softmax(a1 @ W2 + b2)
+    return np.argmax(a2, axis=1)
+
+# Run training
+train(epochs=1000, lr=0.1)
