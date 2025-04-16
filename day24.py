@@ -42,3 +42,5 @@ def main():
 
     queue.join()
     print(Fore.CYAN + "\n✅ Scan complete.")
+if __name__ == "__main__":
+    main()
