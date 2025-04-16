@@ -26,3 +26,8 @@ def scan_port(port):
         s.close()
     except:
         pass
+def worker():
+    while not queue.empty():
+        port = queue.get()
+        scan_port(port)
+        queue.task_done()
