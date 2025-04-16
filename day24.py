@@ -31,3 +31,14 @@ def worker():
         port = queue.get()
         scan_port(port)
         queue.task_done()
+def main():
+    for port in range(start_port, end_port + 1):
+        queue.put(port)
+
+    for _ in range(thread_count):
+        t = threading.Thread(target=worker)
+        t.daemon = True
+        t.start()
+
+    queue.join()
+    print(Fore.CYAN + "\n✅ Scan complete.")
