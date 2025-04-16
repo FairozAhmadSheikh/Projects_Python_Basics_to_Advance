@@ -1,3 +1,9 @@
+"""
+pip install pipwin  
+pipwin install pyaudio
+
+"""
+
 import socket
 import threading
 from queue import Queue
