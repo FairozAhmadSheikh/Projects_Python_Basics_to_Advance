@@ -13,3 +13,16 @@ end_port = int(input("End port: "))
 
 thread_count = 100
 queue = Queue()
+def scan_port(port):
+    try:
+        s = socket.socket()
+        s.settimeout(1)
+        s.connect((target, port))
+        try:
+            banner = s.recv(1024).decode().strip()
+        except:
+            banner = "No banner"
+        print(Fore.GREEN + f"[+] Port {port} is OPEN → {banner}")
+        s.close()
+    except:
+        pass
