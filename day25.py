@@ -42,3 +42,16 @@ def update_dashboard(country):
     cases = list(timeline['cases'].values())
     deaths = list(timeline['deaths'].values())
     recovered = list(timeline['recovered'].values())
+    fig = {
+        'data': [
+            go.Scatter(x=dates, y=cases, name='Cases', line=dict(color='orange')),
+            go.Scatter(x=dates, y=deaths, name='Deaths', line=dict(color='red')),
+            go.Scatter(x=dates, y=recovered, name='Recovered', line=dict(color='green')),
+        ],
+        'layout': go.Layout(
+            title=f"COVID-19 in {country} (Last 30 days)",
+            xaxis={'title': 'Date'},
+            yaxis={'title': 'Count'},
+            hovermode='closest'
+        )
+    }
