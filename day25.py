@@ -1,3 +1,5 @@
+# pip install dash plotly requests
+
 import requests
 import dash
 from dash import dcc, html
