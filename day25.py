@@ -57,3 +57,5 @@ def update_dashboard(country):
     }
     latest = f"🦠 Latest Stats for {country} — Cases: {cases[-1]} | Deaths: {deaths[-1]} | Recovered: {recovered[-1]}"
     return fig, latest
+if __name__ == '__main__':
+    app.run_server(debug=True)
