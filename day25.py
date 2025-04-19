@@ -55,3 +55,5 @@ def update_dashboard(country):
             hovermode='closest'
         )
     }
+    latest = f"🦠 Latest Stats for {country} — Cases: {cases[-1]} | Deaths: {deaths[-1]} | Recovered: {recovered[-1]}"
+    return fig, latest
