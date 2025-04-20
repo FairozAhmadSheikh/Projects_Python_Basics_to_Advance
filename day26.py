@@ -20,3 +20,16 @@ def generate_invoice(customer_name, items, filename="invoice.pdf"):
     c.drawString(250, height - 140, "Quantity")
     c.drawString(350, height - 140, "Price")
     c.drawString(450, height - 140, "Total")
+    y = height - 160
+    grand_total = 0
+
+    for item in items:
+        name, qty, price = item
+        total = qty * price
+        grand_total += total
+
+        c.drawString(50, y, name)
+        c.drawString(250, y, str(qty))
+        c.drawString(350, y, f"${price:.2f}")
+        c.drawString(450, y, f"${total:.2f}")
+        y -= 20
