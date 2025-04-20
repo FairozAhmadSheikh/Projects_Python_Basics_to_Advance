@@ -52,3 +52,4 @@ items = [
     ("AI Bootcamp", 1, 2500),
     ("Machine Learning Notes", 3, 500),
 ]
+generate_invoice(customer, items, "mohammed_invoice.pdf")
