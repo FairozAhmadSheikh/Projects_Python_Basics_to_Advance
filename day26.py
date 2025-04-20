@@ -46,10 +46,10 @@ def generate_invoice(customer_name, items, filename="invoice.pdf"):
     print(f"✅ Invoice saved as {filename}")
 
 # Example usage
-customer = "Mohammed Hussain Malik"
+customer = "Fairoz Ahmad Sheikh"
 items = [
     ("Python Training", 2, 1500),
     ("AI Bootcamp", 1, 2500),
     ("Machine Learning Notes", 3, 500),
 ]
-generate_invoice(customer, items, "mohammed_invoice.pdf")
+generate_invoice(customer, items, "fairoz_sheikh.pdf")
