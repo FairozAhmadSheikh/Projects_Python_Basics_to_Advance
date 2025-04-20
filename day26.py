@@ -33,3 +33,22 @@ def generate_invoice(customer_name, items, filename="invoice.pdf"):
         c.drawString(350, y, f"${price:.2f}")
         c.drawString(450, y, f"${total:.2f}")
         y -= 20
+    # Total
+    tax = 0.18 * grand_total
+    final_total = grand_total + tax
+
+    c.drawString(50, y - 20, f"Subtotal: ${grand_total:.2f}")
+    c.drawString(50, y - 40, f"Tax (18%): ${tax:.2f}")
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(50, y - 70, f"Total Amount: ${final_total:.2f}")
+
+    c.save()
+    print(f"✅ Invoice saved as {filename}")
+
+# Example usage
+customer = "Mohammed Hussain Malik"
+items = [
+    ("Python Training", 2, 1500),
+    ("AI Bootcamp", 1, 2500),
+    ("Machine Learning Notes", 3, 500),
+]
