@@ -43,3 +43,20 @@ def fill_grid(grid):
                         grid[i][j] = 0
                 return False
     return True
+
+def generate_puzzle():
+    grid = np.zeros((9, 9), dtype=int)
+    fill_grid(grid)
+    # Remove numbers to make it a puzzle
+    attempts = 40
+    while attempts > 0:
+        row, col = random.randint(0,8), random.randint(0,8)
+        while grid[row][col] == 0:
+            row, col = random.randint(0,8), random.randint(0,8)
+        backup = grid[row][col]
+        grid[row][col] = 0
+        copy = grid.copy()
+        if not solve_sudoku(copy):
+            grid[row][col] = backup
+        attempts -= 1
+    return grid
