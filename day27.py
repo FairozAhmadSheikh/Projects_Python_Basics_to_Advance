@@ -27,3 +27,19 @@ def solve_sudoku(board):
                         board[row][col] = 0
                 return False
     return True
+
+# --- Sudoku Generator ---
+def fill_grid(grid):
+    nums = list(range(1, 10))
+    for i in range(9):
+        for j in range(9):
+            if grid[i][j] == 0:
+                random.shuffle(nums)
+                for num in nums:
+                    if is_valid(grid, i, j, num):
+                        grid[i][j] = num
+                        if fill_grid(grid):
+                            return True
+                        grid[i][j] = 0
+                return False
+    return True
