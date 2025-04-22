@@ -109,3 +109,7 @@ class SudokuGUI:
                 if self.board[i][j] != 0:
                     self.cells[(i, j)].insert(0, str(self.board[i][j]))
                     self.cells[(i, j)].config(state='disabled', fg="black")
+if __name__ == "__main__":
+    root = tk.Tk()
+    gui = SudokuGUI(root)
+    root.mainloop()
