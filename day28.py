@@ -30,3 +30,14 @@ def colorize_image(img_path):
     net.setInput(cv2.dnn.blobFromImage(L))
     ab = net.forward()[0, :, :, :].transpose((1, 2, 0))
     ab = cv2.resize(ab, (bw.shape[1], bw.shape[0]))
+
+    L = lab[:, :, 0]
+    colorized = np.concatenate((L[:, :, np.newaxis], ab), axis=2)
+    colorized = cv2.cvtColor(colorized, cv2.COLOR_LAB2BGR)
+    colorized = np.clip(colorized, 0, 1)
+
+    # Display
+    cv2.imshow("Black & White", bw)
+    cv2.imshow("Colorized", (colorized * 255).astype("uint8"))
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
