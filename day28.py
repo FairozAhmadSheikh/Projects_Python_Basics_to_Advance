@@ -41,3 +41,5 @@ def colorize_image(img_path):
     cv2.imshow("Colorized", (colorized * 255).astype("uint8"))
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+# Example
+colorize_image("bw_photo.jpg")
