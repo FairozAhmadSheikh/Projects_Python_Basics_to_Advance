@@ -17,3 +17,15 @@ def talk(text):
     print("🗣️ Assistant:", text)
     engine.say(text)
     engine.runAndWait()
+
+def take_command():
+    listener = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("🎙️ Listening...")
+        audio = listener.listen(source)
+        try:
+            command = listener.recognize_google(audio)
+            print("🧑‍💻 You:", command)
+        except sr.UnknownValueError:
+            return "None"
+    return command.lower()
