@@ -65,3 +65,5 @@ def run_assistant():
 
         else:
             talk("Sorry, I don't understand. Try saying something else.")
+if __name__ == "__main__":
+    run_assistant()
