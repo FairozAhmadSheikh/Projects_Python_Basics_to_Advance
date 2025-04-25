@@ -32,3 +32,29 @@ def calculate_fibonacci_parallel(numbers):
                 print(f'Fibonacci({n}) generated an exception: {exc}')
                 results[n] = None  # Store None to indicate an error
     return results
+# 3. Interactive Component: Number Guessing Game
+def number_guessing_game():
+    """
+    A fun, interactive number guessing game.
+    """
+    secret_number = random.randint(1, 100)
+    attempts = 0
+
+    print("\nWelcome to the Number Guessing Game!")
+    print("I'm thinking of a number between 1 and 100.")
+
+    while True:
+        try:
+            guess = int(input("Enter your guess: "))
+            attempts += 1
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue
+
+        if guess < secret_number:
+            print("Too low!")
+        elif guess > secret_number:
+            print("Too high!")
+        else:
+            print(f"Congratulations! You guessed the number in {attempts} attempts.")
+            break
