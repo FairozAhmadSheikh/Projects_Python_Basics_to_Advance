@@ -58,3 +58,38 @@ def number_guessing_game():
         else:
             print(f"Congratulations! You guessed the number in {attempts} attempts.")
             break
+# 4.  Main function to orchestrate the program
+def main():
+    """
+    Main function to run the amazing program.
+    """
+    print("Amazing Python Program")
+    print("------------------------")
+
+    # 1. Fibonacci Sequence
+    print("\nFibonacci Sequence Calculation:")
+    numbers = [10, 20, 30, 5, 40, 15]
+    print(f"Calculating Fibonacci numbers for: {numbers}")
+    start_time = time.time()
+    results = calculate_fibonacci_parallel(numbers)
+    end_time = time.time()
+    print(f"Results: {results}")
+    print(f"Time taken for parallel Fibonacci calculation: {end_time - start_time:.4f} seconds")
+
+    # 2.  Showcasing lru_cache efficiency
+    print("\nFibonacci Sequence (Memoized):")
+    print("Calculating fibonacci(35) and fibonacci(36)")
+    start_time = time.time()
+    print(f"fibonacci(35) = {fibonacci(35)}")
+    print(f"fibonacci(36) = {fibonacci(36)}") # This will be super fast because of caching
+    end_time = time.time()
+    print(f"Time taken for memoized Fibonacci calculations: {end_time - start_time:.4f} seconds")
+
+
+    # 3. Number Guessing Game
+    number_guessing_game()
+
+    print("\nEnd of Amazing Program!")
+
+if __name__ == "__main__":
+    main()
