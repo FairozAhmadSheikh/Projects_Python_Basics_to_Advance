@@ -36,3 +36,7 @@ def plot_data(timestamps, data):
                       yaxis_title='Price (USD)',
                       template='plotly_dark')
     fig.show()
+# Example
+crypto_list = ['bitcoin', 'ethereum', 'dogecoin']
+timestamps, price_data = track_crypto(crypto_list, duration=60, interval=5)
+plot_data(timestamps, price_data)
