@@ -44,3 +44,30 @@ def retrieve_password(service):
             print("No details for this service.")
     except Exception as e:
         print("Error reading data:", e)
+    def main():
+if not os.path.exists("secret.key"):
+    generate_key()
+
+while True:
+    choice = input("\n1. Save Password\n2. Retrieve Password\n3. Exit\nEnter Choice: ")
+
+    if choice == '1':
+        service = input("Service Name: ")
+        username = input("Username: ")
+        password = input("Password: ")
+        save_password(service, username, password)
+        print("✅ Password Saved Securely!")
+
+    elif choice == '2':
+        service = input("Enter Service Name to Retrieve: ")
+        retrieve_password(service)
+
+    elif choice == '3':
+        print("🔒 Exiting Password Manager. Stay Safe!")
+        break
+
+    else:
+        print("❌ Invalid Choice. Try Again.")
+
+if __name__ == "__main__":
+main()
