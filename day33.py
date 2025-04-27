@@ -1,4 +1,3 @@
-# pip install cryptography
 from cryptography.fernet import Fernet
 import json
 import os
@@ -12,6 +11,7 @@ def generate_key():
 # Load the previously generated key
 def load_key():
     return open("secret.key", "rb").read()
+
 # Encrypt and save passwords
 def save_password(service, username, password):
     key = load_key()
@@ -28,7 +28,8 @@ def save_password(service, username, password):
 
     with open("passwords.json", "wb") as file:
         file.write(encrypted_data)
-        # Retrieve passwords
+
+# Retrieve passwords
 def retrieve_password(service):
     key = load_key()
     fernet = Fernet(key)
@@ -44,30 +45,31 @@ def retrieve_password(service):
             print("No details for this service.")
     except Exception as e:
         print("Error reading data:", e)
-    def main():
-if not os.path.exists("secret.key"):
-    generate_key()
 
-while True:
-    choice = input("\n1. Save Password\n2. Retrieve Password\n3. Exit\nEnter Choice: ")
+def main():
+    if not os.path.exists("secret.key"):
+        generate_key()
 
-    if choice == '1':
-        service = input("Service Name: ")
-        username = input("Username: ")
-        password = input("Password: ")
-        save_password(service, username, password)
-        print("✅ Password Saved Securely!")
+    while True:
+        choice = input("\n1. Save Password\n2. Retrieve Password\n3. Exit\nEnter Choice: ")
 
-    elif choice == '2':
-        service = input("Enter Service Name to Retrieve: ")
-        retrieve_password(service)
+        if choice == '1':
+            service = input("Service Name: ")
+            username = input("Username: ")
+            password = input("Password: ")
+            save_password(service, username, password)
+            print("✅ Password Saved Securely!")
 
-    elif choice == '3':
-        print("🔒 Exiting Password Manager. Stay Safe!")
-        break
+        elif choice == '2':
+            service = input("Enter Service Name to Retrieve: ")
+            retrieve_password(service)
 
-    else:
-        print("❌ Invalid Choice. Try Again.")
+        elif choice == '3':
+            print("🔒 Exiting Password Manager. Stay Safe!")
+            break
+
+        else:
+            print("❌ Invalid Choice. Try Again.")
 
 if __name__ == "__main__":
-main()
+    main()
