@@ -28,3 +28,19 @@ def save_password(service, username, password):
 
     with open("passwords.json", "wb") as file:
         file.write(encrypted_data)
+        # Retrieve passwords
+def retrieve_password(service):
+    key = load_key()
+    fernet = Fernet(key)
+
+    try:
+        with open("passwords.json", "rb") as file:
+            data = json.loads(fernet.decrypt(file.read()).decode())
+        if service in data:
+            print(f"Service: {service}")
+            print(f"Username: {data[service]['username']}")
+            print(f"Password: {data[service]['password']}")
+        else:
+            print("No details for this service.")
+    except Exception as e:
+        print("Error reading data:", e)
