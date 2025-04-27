@@ -12,3 +12,19 @@ def generate_key():
 # Load the previously generated key
 def load_key():
     return open("secret.key", "rb").read()
+# Encrypt and save passwords
+def save_password(service, username, password):
+    key = load_key()
+    fernet = Fernet(key)
+
+    if os.path.exists("passwords.json"):
+        with open("passwords.json", "rb") as file:
+            data = json.loads(fernet.decrypt(file.read()).decode())
+    else:
+        data = {}
+
+    data[service] = {"username": username, "password": password}
+    encrypted_data = fernet.encrypt(json.dumps(data).encode())
+
+    with open("passwords.json", "wb") as file:
+        file.write(encrypted_data)
