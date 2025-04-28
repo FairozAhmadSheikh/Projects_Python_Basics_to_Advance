@@ -79,3 +79,15 @@ def receive():
             print("❌ An error occurred!")
             client.close()
             break
+# Send messages
+def write():
+    while True:
+        message = f'{nickname}: {input("")}'
+        client.send(message.encode('utf-8'))
+
+# Start threads
+receive_thread = threading.Thread(target=receive)
+receive_thread.start()
+
+write_thread = threading.Thread(target=write)
+write_thread.start()
