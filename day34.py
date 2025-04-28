@@ -79,6 +79,7 @@ def receive():
             print("❌ An error occurred!")
             client.close()
             break
+
 # Send messages
 def write():
     while True:
