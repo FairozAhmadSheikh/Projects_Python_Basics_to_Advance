@@ -40,3 +40,32 @@ def mark_attendance(name):
         print(f"✅ Attendance marked for {name} at {time_string}")
 
 # Encode known faces
+encode_list_known = find_encodings(images)
+print("🔍 Face encodings loaded.")
+
+# Start webcam
+cap = cv2.VideoCapture(0)
+
+while True:
+    success, img = cap.read()
+    if not success:
+        break
+
+    img_small = cv2.resize(img, (0, 0), fx=0.25, fy=0.25)
+    img_small = cv2.cvtColor(img_small, cv2.COLOR_BGR2RGB)
+
+    faces_cur_frame = face_recognition.face_locations(img_small)
+    encodes_cur_frame = face_recognition.face_encodings(img_small, faces_cur_frame)
+
+    for encode_face, face_loc in zip(encodes_cur_frame, faces_cur_frame):
+        matches = face_recognition.compare_faces(encode_list_known, encode_face)
+        face_dist = face_recognition.face_distance(encode_list_known, encode_face)
+
+        match_index = np.argmin(face_dist)
+
+        if matches[match_index]:
+            name = names[match_index].upper()
+            y1, x2, y2, x1 = [v * 4 for v in face_loc]  # Resize to original size
+            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.putText(img, name, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            mark_attendance(name)
