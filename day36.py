@@ -23,3 +23,20 @@ def find_encodings(images):
         if encode:
             encode_list.append(encode[0])
     return encode_list
+def mark_attendance(name):
+    now = datetime.now()
+    date_string = now.strftime('%Y-%m-%d')
+    time_string = now.strftime('%H:%M:%S')
+
+    if not os.path.exists("attendance.csv"):
+        df = pd.DataFrame(columns=["Name", "Date", "Time"])
+        df.to_csv("attendance.csv", index=False)
+
+    df = pd.read_csv("attendance.csv")
+
+    if not ((df['Name'] == name) & (df['Date'] == date_string)).any():
+        df = df.append({"Name": name, "Date": date_string, "Time": time_string}, ignore_index=True)
+        df.to_csv("attendance.csv", index=False)
+        print(f"✅ Attendance marked for {name} at {time_string}")
+
+# Encode known faces
