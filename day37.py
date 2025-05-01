@@ -49,3 +49,5 @@ def main():
 
     # Clean up
     os.remove(audio_path)
+if __name__ == "__main__":
+    main()
