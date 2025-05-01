@@ -34,3 +34,18 @@ def summarize_text(text):
         result = summarizer(chunk, max_length=150, min_length=40, do_sample=False)
         summary += result[0]['summary_text'] + " "
     return summary.strip()
+# Main program
+def main():
+    url = input("🔗 Enter YouTube video URL: ")
+    audio_path = download_video(url)
+    
+    transcript = transcribe_audio(audio_path)
+    print("\n📜 Full Transcript:")
+    print(transcript[:500] + "..." if len(transcript) > 500 else transcript)
+
+    summary = summarize_text(transcript)
+    print("\n📝 Summary:")
+    print(summary)
+
+    # Clean up
+    os.remove(audio_path)
