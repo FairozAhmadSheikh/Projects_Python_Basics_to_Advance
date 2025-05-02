@@ -33,3 +33,7 @@ def main():
 
     print("🧠 Scanning and ranking resumes...")
     ranked = rank_resumes(folder, job_desc)
+    df = pd.DataFrame(ranked, columns=["Resume", "Relevance Score"])
+    df.to_csv("ranked_resumes.csv", index=False)
+    print("✅ Done! Results saved to 'ranked_resumes.csv'")
+    print(df)
