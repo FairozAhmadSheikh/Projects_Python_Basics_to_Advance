@@ -27,3 +27,9 @@ def rank_resumes(resume_folder, job_description):
 
     sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
     return sorted_scores
+def main():
+    job_desc = input("📋 Enter the job description:\n")
+    folder = input("📁 Enter path to folder containing resumes: ").strip()
+
+    print("🧠 Scanning and ranking resumes...")
+    ranked = rank_resumes(folder, job_desc)
