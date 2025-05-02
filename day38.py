@@ -1,4 +1,3 @@
-# pip install pdfplumber sklearn sentence-transformers pandas
 import pdfplumber
 import os
 import pandas as pd
@@ -13,6 +12,7 @@ def extract_text_from_pdf(pdf_path):
         for page in pdf.pages:
             text += page.extract_text() + '\n'
     return text
+
 def rank_resumes(resume_folder, job_description):
     scores = []
     job_embedding = model.encode([job_description])[0]
@@ -27,12 +27,14 @@ def rank_resumes(resume_folder, job_description):
 
     sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
     return sorted_scores
+
 def main():
     job_desc = input("📋 Enter the job description:\n")
     folder = input("📁 Enter path to folder containing resumes: ").strip()
 
     print("🧠 Scanning and ranking resumes...")
     ranked = rank_resumes(folder, job_desc)
+
     df = pd.DataFrame(ranked, columns=["Resume", "Relevance Score"])
     df.to_csv("ranked_resumes.csv", index=False)
     print("✅ Done! Results saved to 'ranked_resumes.csv'")
