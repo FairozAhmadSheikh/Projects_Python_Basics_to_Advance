@@ -13,3 +13,17 @@ def extract_text_from_pdf(pdf_path):
         for page in pdf.pages:
             text += page.extract_text() + '\n'
     return text
+def rank_resumes(resume_folder, job_description):
+    scores = []
+    job_embedding = model.encode([job_description])[0]
+
+    for filename in os.listdir(resume_folder):
+        if filename.endswith('.pdf'):
+            full_path = os.path.join(resume_folder, filename)
+            resume_text = extract_text_from_pdf(full_path)
+            resume_embedding = model.encode([resume_text])[0]
+            similarity = cosine_similarity([job_embedding], [resume_embedding])[0][0]
+            scores.append((filename, similarity))
+
+    sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
+    return sorted_scores
