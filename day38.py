@@ -37,3 +37,6 @@ def main():
     df.to_csv("ranked_resumes.csv", index=False)
     print("✅ Done! Results saved to 'ranked_resumes.csv'")
     print(df)
+
+if __name__ == "__main__":
+    main()
