@@ -52,5 +52,8 @@ if __name__ == "__main__":
 </body>
 </html>
 
-
-#
+#  This would be folder structure I dont want to mess up my this series adjust accordingly 
+#ai_blog_generator/
+# ├── app.py
+# ├── templates/
+# │   └── index.html
