@@ -42,4 +42,5 @@ def main():
             print(f" - {port} ({service})")
     else:
         print("❌ No open ports found.")
-c6
+if __name__ == "__main__":
+    main()
