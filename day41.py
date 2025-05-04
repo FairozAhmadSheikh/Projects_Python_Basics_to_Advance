@@ -51,3 +51,7 @@ def predict_file(file_path, model):
         print("🛑 Malware Detected!" if result == 1 else "✅ File is Clean.")
     else:
         print("Could not analyze file.")
+
+
+# We can expand it by 
+# Build a Flask app to upload files and scan them
