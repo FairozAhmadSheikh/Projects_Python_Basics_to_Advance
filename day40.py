@@ -28,3 +28,10 @@ def main():
     print(f"\n🕵️ Scanning {target} from port {start_port} to {end_port}...\n")
 
     threads = []
+    for port in range(start_port, end_port + 1):
+        t = threading.Thread(target=scan_port, args=(target, port))
+        threads.append(t)
+        t.start()
+
+    for t in threads:
+        t.join()
