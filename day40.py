@@ -21,3 +21,10 @@ def scan_port(ip, port):
         sock.close()
     except:
         pass
+def main():
+    target = input("🔍 Enter target IP address: ").strip()
+    start_port = int(input("🔢 Start port: "))
+    end_port = int(input("🔢 End port: "))
+    print(f"\n🕵️ Scanning {target} from port {start_port} to {end_port}...\n")
+
+    threads = []
