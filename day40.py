@@ -35,3 +35,11 @@ def main():
 
     for t in threads:
         t.join()
+    print("\n✅ Scan Complete.")
+    if open_ports:
+        print("📄 Open Ports:")
+        for port, service in open_ports:
+            print(f" - {port} ({service})")
+    else:
+        print("❌ No open ports found.")
+c6
