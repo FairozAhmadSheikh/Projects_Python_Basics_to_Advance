@@ -42,3 +42,12 @@ clf.fit(X_train, y_train)
 # Evaluate
 y_pred = clf.predict(X_test)
 print(f"Accuracy: {accuracy_score(y_test, y_pred)*100:.2f}%")
+
+def predict_file(file_path, model):
+    features = extract_features(file_path)
+    if features:
+        df = pd.DataFrame([features])
+        result = model.predict(df)[0]
+        print("🛑 Malware Detected!" if result == 1 else "✅ File is Clean.")
+    else:
+        print("Could not analyze file.")
