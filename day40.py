@@ -8,3 +8,16 @@ common_ports = {
     80: "HTTP", 110: "POP3", 143: "IMAP", 443: "HTTPS", 3306: "MySQL",
     3389: "RDP", 8080: "HTTP-ALT"
 }
+open_ports = []
+
+def scan_port(ip, port):
+    try:
+        sock = socket.socket()
+        sock.settimeout(1)
+        sock.connect((ip, port))
+        service = common_ports.get(port, "Unknown")
+        print(f"{Fore.GREEN}[+] Port {port} OPEN ({service}){Style.RESET_ALL}")
+        open_ports.append((port, service))
+        sock.close()
+    except:
+        pass
