@@ -47,3 +47,12 @@ clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
 
 print("✅ Classification Report:\n", classification_report(y_test, y_pred))
+
+#  Live Detection
+
+cdn 2 
+def detect_phishing(url, model):
+    features = extract_url_features(url)
+    df = pd.DataFrame([features])
+    result = model.predict(df)[0]
+    print("🛑 Phishing URL!" if result == 1 else "✅ Legitimate URL.")
