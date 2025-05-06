@@ -49,8 +49,6 @@ y_pred = clf.predict(X_test)
 print("✅ Classification Report:\n", classification_report(y_test, y_pred))
 
 #  Live Detection
-
-cdn 2 
 def detect_phishing(url, model):
     features = extract_url_features(url)
     df = pd.DataFrame([features])
