@@ -38,3 +38,13 @@ model.fit(X, y)
 # Save model
 with open("model.pkl", "wb") as f:
     pickle.dump(model, f)
+
+
+""" 
+Additional Informatiom Folder Structor
+Phisihing URL Detector - web app/
+├── app.py
+├── model.pkl
+├── templates/
+│   └── index.html
+"""
