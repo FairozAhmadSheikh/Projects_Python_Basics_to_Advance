@@ -37,3 +37,5 @@ for i in range(3):
 # Show the fortune
 os.system('cls' if os.name == 'nt' else 'clear')
 fortune = random.choice(fortunes)
+print("\n🔮 Your Digital Fortune:\n")
+print(f"👉 {fortune}\n")
