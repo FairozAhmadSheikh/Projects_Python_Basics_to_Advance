@@ -12,3 +12,20 @@ fortunes = [
     "Refactor now, profit later.",
     "Your logic is as sharp as Python’s syntax.",
 ]
+ascii_frames = [
+    r"""
+     ( •_•)
+    <)   )╯ Fortune loading...
+     /   \
+    """,
+    r"""
+     ( •_•)
+    <)   )╯ Your fortune is ready!
+     /   \
+    """,
+    r"""
+     ( •_•)
+    <)   )╯ Here it comes...
+     /   \
+    """,
+]
