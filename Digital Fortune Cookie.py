@@ -39,3 +39,4 @@ os.system('cls' if os.name == 'nt' else 'clear')
 fortune = random.choice(fortunes)
 print("\n🔮 Your Digital Fortune:\n")
 print(f"👉 {fortune}\n")
+websites = ["https://thezen.zone/", "https://neal.fun/ambient-chaos/", "https://weavesilk.com/"]
