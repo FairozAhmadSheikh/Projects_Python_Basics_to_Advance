@@ -34,3 +34,6 @@ for i in range(3):
     os.system('cls' if os.name == 'nt' else 'clear')
     print(ascii_frames[i % len(ascii_frames)])
     time.sleep(1)
+# Show the fortune
+os.system('cls' if os.name == 'nt' else 'clear')
+fortune = random.choice(fortunes)
