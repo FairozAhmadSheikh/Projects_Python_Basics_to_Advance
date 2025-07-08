@@ -21,3 +21,8 @@ class FaceDetectionApp:
         self.snapshot_btn.pack(pady=10)
 
         self.update_frame()
+    def update_frame(self):
+        ret, frame = self.video_capture.read()
+        if ret:
+            # Convert to grayscale for detection
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
