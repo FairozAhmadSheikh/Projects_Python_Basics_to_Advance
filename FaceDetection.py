@@ -26,3 +26,5 @@ class FaceDetectionApp:
         if ret:
             # Convert to grayscale for detection
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            # Detect faces
+            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
