@@ -40,3 +40,10 @@ class FaceDetectionApp:
             self.label.configure(image=imgtk)
 
         self.window.after(10, self.update_frame)
+    def take_snapshot(self):
+        ret, frame = self.video_capture.read()
+        if ret:
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            filename = f"snapshots/face_snapshot_{timestamp}.jpg"
+            cv2.imwrite(filename, frame)
+            print(f"✅ Snapshot saved: {filename}")
