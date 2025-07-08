@@ -49,3 +49,8 @@ class FaceDetectionApp:
             print(f"✅ Snapshot saved: {filename}")
     def __del__(self):
         self.video_capture.release()
+# Run the app
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = FaceDetectionApp(root)
+    root.mainloop()
