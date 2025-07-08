@@ -28,3 +28,6 @@ class FaceDetectionApp:
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             # Detect faces
             faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
+            # Draw rectangles
+            for (x, y, w, h) in faces:
+                cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
