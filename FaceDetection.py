@@ -47,3 +47,5 @@ class FaceDetectionApp:
             filename = f"snapshots/face_snapshot_{timestamp}.jpg"
             cv2.imwrite(filename, frame)
             print(f"✅ Snapshot saved: {filename}")
+    def __del__(self):
+        self.video_capture.release()
