@@ -31,3 +31,12 @@ class FaceDetectionApp:
             # Draw rectangles
             for (x, y, w, h) in faces:
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            # Convert BGR to RGB for Tkinter
+            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            img = Image.fromarray(rgb_frame)
+            imgtk = ImageTk.PhotoImage(image=img)
+
+            self.label.imgtk = imgtk
+            self.label.configure(image=imgtk)
+
+        self.window.after(10, self.update_frame)
