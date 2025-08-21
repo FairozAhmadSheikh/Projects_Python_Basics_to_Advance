@@ -17,3 +17,4 @@ while True:
         # If the column is at the top of the screen (i.e., inactive)
         if columns[i] == 0 and random.random() < 0.02:
             columns[i] = random.randint(10, rows - 5)
+            
