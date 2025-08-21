@@ -30,3 +30,7 @@ while True:
         # Move cursor and print a space to erase the last character in the trail
         if columns[i] > 0 and columns[i] < rows:
             sys.stdout.write(f"\033[{columns[i] + 1};{i + 1}H ")
+        # Decrement the trail length to make it "fall"
+        columns[i] -= 1
+
+    
