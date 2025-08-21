@@ -33,4 +33,8 @@ while True:
         # Decrement the trail length to make it "fall"
         columns[i] -= 1
 
-    
+    # Flush the output buffer to ensure it's displayed immediately
+    sys.stdout.flush()
+
+    # Pause for a short time to control animation speed
+    time.sleep(0.05)
