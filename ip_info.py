@@ -29,3 +29,6 @@ def display_ip_info(ip_address):
             print("Couldn't retrieve detailed information for that IP.")
     except Exception as e:
         print(f"An error occurred while retrieving IP details: {e}")
+if __name__ == "__main__":
+    print("Welcome! Let's find out some cool stuff about your IP address.")
+    user_ip = get_user_ip()
