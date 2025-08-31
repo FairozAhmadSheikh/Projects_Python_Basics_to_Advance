@@ -32,3 +32,9 @@ def display_ip_info(ip_address):
 if __name__ == "__main__":
     print("Welcome! Let's find out some cool stuff about your IP address.")
     user_ip = get_user_ip()
+
+    if user_ip:
+        print(f"Your public IP address is: {user_ip}")
+        display_ip_info(user_ip)
+    else:
+        print("Couldn't get your IP. Please check your internet connection and try again.")
