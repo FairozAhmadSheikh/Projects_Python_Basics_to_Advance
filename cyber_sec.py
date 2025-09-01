@@ -43,3 +43,8 @@ except socket.gaierror:
         s.close()
 if __name__ == "__main__":
     print_banner()
+
+    target_input = input("Enter the target host to scan: ").strip()
+        if target_input:
+            TARGET_HOST = target_input
+    
