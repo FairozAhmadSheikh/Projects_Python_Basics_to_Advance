@@ -41,3 +41,5 @@ except socket.gaierror:
     finally:
         # Always close the socket to free up system resources.
         s.close()
+if __name__ == "__main__":
+    print_banner()
