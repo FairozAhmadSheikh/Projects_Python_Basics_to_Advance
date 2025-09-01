@@ -47,4 +47,17 @@ if __name__ == "__main__":
     target_input = input("Enter the target host to scan: ").strip()
         if target_input:
             TARGET_HOST = target_input
-    
+    while True:
+        try:
+            port_start_input = int(input("Enter the starting port: ").strip())
+            port_end_input = int(input("Enter the ending port: ").strip())
+            
+            # Validate the port range.
+            if 0 <= port_start_input <= 65535 and 0 <= port_end_input <= 65535 and port_start_input <= port_end_input:
+                PORT_RANGE_START = port_start_input
+                PORT_RANGE_END = port_end_input
+                break
+            else:
+                print("Invalid port range. Ports must be between 0 and 65535, and the start port must be less than or equal to the end port.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
