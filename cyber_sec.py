@@ -61,3 +61,16 @@ if __name__ == "__main__":
                 print("Invalid port range. Ports must be between 0 and 65535, and the start port must be less than or equal to the end port.")
         except ValueError:
             print("Invalid input. Please enter a valid number.")
+
+            print(f"\nScanning host: {TARGET_HOST}")
+            print(f"Scanning port range: {PORT_RANGE_START} - {PORT_RANGE_END}\n")
+
+            # This loop iterates through the specified port range and calls the scanner function for each port.
+            try:
+                for port in range(PORT_RANGE_START, PORT_RANGE_END + 1):
+                    port_scanner(port)
+                    
+            except KeyboardInterrupt:
+                # Allows the user to gracefully exit the program by pressing Ctrl+C.
+                print("\nScan interrupted by user. Exiting.")
+                sys.exit()
