@@ -30,3 +30,14 @@ try:
     # If the connection code is 0, the connection was successful, and the port is open.
     if conn == 0:
         print(f"Port {port}: OPEN")
+except socket.gaierror:
+        # Handles errors related to an invalid hostname.
+        print("Hostname could not be resolved. Exiting.")
+        sys.exit()
+    except socket.error:
+        # Handles generic socket errors.
+        print("Could not connect to the server.")
+        sys.exit()
+    finally:
+        # Always close the socket to free up system resources.
+        s.close()
