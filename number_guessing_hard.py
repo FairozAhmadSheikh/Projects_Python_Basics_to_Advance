@@ -14,3 +14,18 @@ def get_difficulty():
                 print("Invalid choice. Please enter 1, 2, or 3.")
         except ValueError:
             print("Invalid input. Please enter a number.")
+def play_game(min_val, max_val):
+    """Handles a single round of the game and returns the number of guesses."""
+    secret_number = random.randint(min_val, max_val)
+    guesses = 0
+
+    print(f"\nI've selected a new number between {min_val} and {max_val}.")
+    
+    while True:
+        try:
+            user_guess = int(input("Enter your guess: "))
+            guesses += 1
+
+            if user_guess < min_val or user_guess > max_val:
+                print(f"Your guess is outside the range. Please guess a number between {min_val} and {max_val}.")
+                continue
