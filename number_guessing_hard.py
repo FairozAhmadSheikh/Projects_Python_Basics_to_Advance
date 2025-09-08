@@ -29,3 +29,10 @@ def play_game(min_val, max_val):
             if user_guess < min_val or user_guess > max_val:
                 print(f"Your guess is outside the range. Please guess a number between {min_val} and {max_val}.")
                 continue
+            if user_guess < secret_number:
+                print("Higher!")
+            elif user_guess > secret_number:
+                print("Lower!")
+            else:
+                print(f"Congratulations! You guessed the number in {guesses} attempts.")
+                return guesses
