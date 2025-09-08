@@ -38,3 +38,9 @@ def play_game(min_val, max_val):
                 return guesses
         except ValueError:
             print("Invalid input. Please enter a whole number.")
+def main():
+    """The main function to run the game and track scores."""
+    total_games = 0
+    total_guesses = 0
+    
+    print("Welcome to the Extended Number Guessing Game!")
