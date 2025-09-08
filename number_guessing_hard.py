@@ -36,3 +36,5 @@ def play_game(min_val, max_val):
             else:
                 print(f"Congratulations! You guessed the number in {guesses} attempts.")
                 return guesses
+        except ValueError:
+            print("Invalid input. Please enter a whole number.")
