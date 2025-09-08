@@ -1,4 +1,5 @@
 import random
+
 def get_difficulty():
     """Gets the difficulty level from the user and returns the corresponding number range."""
     while True:
@@ -14,6 +15,7 @@ def get_difficulty():
                 print("Invalid choice. Please enter 1, 2, or 3.")
         except ValueError:
             print("Invalid input. Please enter a number.")
+
 def play_game(min_val, max_val):
     """Handles a single round of the game and returns the number of guesses."""
     secret_number = random.randint(min_val, max_val)
@@ -29,6 +31,7 @@ def play_game(min_val, max_val):
             if user_guess < min_val or user_guess > max_val:
                 print(f"Your guess is outside the range. Please guess a number between {min_val} and {max_val}.")
                 continue
+
             if user_guess < secret_number:
                 print("Higher!")
             elif user_guess > secret_number:
@@ -38,6 +41,7 @@ def play_game(min_val, max_val):
                 return guesses
         except ValueError:
             print("Invalid input. Please enter a whole number.")
+
 def main():
     """The main function to run the game and track scores."""
     total_games = 0
@@ -52,21 +56,15 @@ def main():
         
         total_games += 1
         total_guesses += guesses
+
         print(f"\n--- Scoreboard ---")
         print(f"Games played: {total_games}")
         print(f"Average guesses per game: {total_guesses / total_games:.2f}")
-<<<<<<< HEAD
 
         play_again = input("\nDo you want to play another game? (yes/no): ").lower()
         if play_again != 'yes':
             print("Thanks for playing! Goodbye.")
             break
+
 if __name__ == "__main__":
     main()
-=======
-
-        play_again = input("\nDo you want to play another game? (yes/no): ").lower()
-        if play_again != 'yes':
-            print("Thanks for playing! Goodbye.")
-            break
->>>>>>> ede32a165fc555531fd30b49d1ef1ff4a3108024
