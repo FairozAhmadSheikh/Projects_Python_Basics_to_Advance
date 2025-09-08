@@ -52,3 +52,6 @@ def main():
         
         total_games += 1
         total_guesses += guesses
+        print(f"\n--- Scoreboard ---")
+        print(f"Games played: {total_games}")
+        print(f"Average guesses per game: {total_guesses / total_games:.2f}")
