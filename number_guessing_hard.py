@@ -44,3 +44,11 @@ def main():
     total_guesses = 0
     
     print("Welcome to the Extended Number Guessing Game!")
+
+    while True:
+        min_val, max_val = get_difficulty()
+        
+        guesses = play_game(min_val, max_val)
+        
+        total_games += 1
+        total_guesses += guesses
