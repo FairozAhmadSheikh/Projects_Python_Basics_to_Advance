@@ -55,3 +55,8 @@ def main():
         print(f"\n--- Scoreboard ---")
         print(f"Games played: {total_games}")
         print(f"Average guesses per game: {total_guesses / total_games:.2f}")
+
+        play_again = input("\nDo you want to play another game? (yes/no): ").lower()
+        if play_again != 'yes':
+            print("Thanks for playing! Goodbye.")
+            break
