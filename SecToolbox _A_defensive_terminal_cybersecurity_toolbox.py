@@ -389,3 +389,80 @@ def interactive_menu():
             break
         else:
             print("Invalid selection. Choose 1-7.")
+
+
+
+def main():
+    parser = argparse.ArgumentParser(description="SecToolbox - mini defensive security toolkit")
+    parser.add_argument("--menu", action="store_true", help="Start interactive menu")
+    parser.add_argument("--discover", help="Discover hosts in CIDR (eg 192.168.1.0/24)")
+    parser.add_argument("--scan-host", help="Scan ports on host (IP or hostname)")
+    parser.add_argument("--ports", help="Ports to scan (eg '22,80,443' or '1-1024')", default="22,80,443")
+    parser.add_argument("--inspect-tls", help="Inspect TLS cert of host (hostname)")
+    parser.add_argument("--check-http", help="Check HTTP security headers for host (hostname)")
+    parser.add_argument("--save-report", help="Save output as JSON to filename")
+    args = parser.parse_args()
+
+    if args.menu:
+        interactive_menu()
+        return
+
+    report = {"timestamp": now_ts(), "actions": []}
+
+    if args.discover:
+        cidr = args.discover
+        if not confirm_authorization():
+            print("Authorization not confirmed. Aborting discovery.")
+            return
+        try:
+            res = discover_network(cidr)
+            report["actions"].append({"discover": {"cidr": cidr, "results": res}})
+            print(f"Discovered {len(res)} hosts.")
+        except Exception as e:
+            print("[!] Discovery failed:", e)
+
+    if args.scan_host:
+        host = args.scan_host
+        if not confirm_authorization():
+            print("Authorization not confirmed. Aborting scan.")
+            return
+        ports = parse_ports(args.ports)
+        res = scan_ports(host, ports)
+        report["actions"].append({"port_scan": {"host": host, "ports": ports, "results": res}})
+        print(f"Scan complete for {host}. Open ports:")
+        for r in res:
+            if r["open"]:
+                print(f" - {r['port']}: banner: {r['banner'] or '<none>'}")
+
+    if args.inspect_tls:
+        host = args.inspect_tls
+        info = inspect_tls_cert(host)
+        report["actions"].append({"tls_inspect": {"host": host, "info": info}})
+        if info.get("error"):
+            print("TLS inspect error:", info["error"])
+        else:
+            print("Certificate notAfter:", info.get("notAfter"), "days_left:", info.get("days_left"))
+
+    if args.check_http:
+        host = args.check_http
+        res = check_http_headers(host)
+        report["actions"].append({"http_check": {"host": host, "result": res}})
+        if res.get("error"):
+            print("HTTP check error:", res["error"])
+        else:
+            print("HTTP security header check done. Present:")
+            for k, v in res.get("security_headers_present", {}).items():
+                print(f" - {k}: {'present' if v else 'missing'}")
+
+    if args.save_report:
+        save_report_json(report, args.save_report)
+    else:
+        # Print short summary if not saved
+        print(json.dumps(report, indent=2))
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nInterrupted by user. Exiting.")
+        sys.exit(0)
