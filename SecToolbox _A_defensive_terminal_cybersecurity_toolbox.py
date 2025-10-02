@@ -127,4 +127,44 @@ def discover_network(cidr: str, use_arp_first=True) -> List[Dict]:
     return results
 
 
+def scan_port(host: str, port: int, timeout: float = 1.0) -> Tuple[int, bool, Optional[str]]:
+    
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(timeout)
+            try:
+                s.connect((host, port))
+            except Exception:
+                return (port, False, None)
+            # If connected, try to receive a small banner
+            banner = None
+            try:
+                s.settimeout(0.8)
+                banner = s.recv(1024).decode(errors="ignore").strip()
+                if banner == "":
+                    banner = None
+            except Exception:
+                banner = None
+            return (port, True, banner)
+    except Exception:
+        return (port, False, None)
+
+def scan_ports(host: str, ports: List[int], max_workers: int = 200) -> List[Dict]:
+    
+    results = []
+    st = time.time()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(ports) or 1)) as ex:
+        futures = {ex.submit(scan_port, host, p): p for p in ports}
+        for fut in concurrent.futures.as_completed(futures):
+            try:
+                port, is_open, banner = fut.result()
+                results.append({"port": port, "open": is_open, "banner": banner})
+            except Exception:
+                p = futures[fut]
+                results.append({"port": p, "open": False, "banner": None})
+    results.sort(key=lambda x: x["port"])
+    elapsed = time.time() - st
+    print(f"[+] Scanned {len(ports)} ports on {host} in {elapsed:.2f}s")
+    return results
+
 
