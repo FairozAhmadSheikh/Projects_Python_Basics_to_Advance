@@ -168,3 +168,82 @@ def scan_ports(host: str, ports: List[int], max_workers: int = 200) -> List[Dict
     return results
 
 
+
+def inspect_tls_cert(host: str, port: int = 443, timeout: float = 3.0) -> Dict:
+    
+    context = ssl.create_default_context()
+    context.check_hostname = False
+    context.verify_mode = ssl.CERT_NONE
+    info = {"host": host, "port": port, "error": None}
+    try:
+        with socket.create_connection((host, port), timeout=timeout) as sock:
+            with context.wrap_socket(sock, server_hostname=host) as ssock:
+                cert = ssock.getpeercert()
+                # cert is a dict per ssl.getpeercert()
+                info["subject"] = dict(x[0] for x in cert.get("subject", ()))
+                info["issuer"] = dict(x[0] for x in cert.get("issuer", ()))
+                info["notAfter"] = cert.get("notAfter")
+                info["notBefore"] = cert.get("notBefore")
+                info["subjectAltName"] = cert.get("subjectAltName", ())
+                # compute days left
+                try:
+                    notAfter = datetime.strptime(info["notAfter"], "%b %d %H:%M:%S %Y %Z")
+                    info["days_left"] = (notAfter - datetime.utcnow()).days
+                except Exception:
+                    info["days_left"] = None
+                # signature algorithm detection is not directly available from getpeercert
+                info["raw_cert"] = cert
+    except Exception as e:
+        info["error"] = str(e)
+    return info
+
+
+
+def check_http_headers(host: str, port: int = 443, path: str = "/", timeout: float = 6.0) -> Dict:
+    
+    result = {"host": host, "port": port, "headers": {}, "secure": False, "error": None}
+    url = f"https://{host}:{port}{path}"
+    try:
+        if REQUESTS_AVAILABLE:
+            resp = requests.get(url, timeout=timeout, verify=False)
+            result["status_code"] = resp.status_code
+            headers = {k.lower(): v for k, v in resp.headers.items()}
+            result["headers"] = headers
+        else:
+            # Raw HTTPS GET using ssl-wrapped socket (simple)
+            context = ssl.create_default_context()
+            context.check_hostname = False
+            context.verify_mode = ssl.CERT_NONE
+            with socket.create_connection((host, port), timeout=timeout) as sock:
+                with context.wrap_socket(sock, server_hostname=host) as ssock:
+                    req = f"GET {path} HTTP/1.1\r\nHost: {host}\r\nConnection: close\r\nUser-Agent: SecToolbox/1.0\r\n\r\n"
+                    ssock.send(req.encode())
+                    data = b""
+                    while True:
+                        chunk = ssock.recv(4096)
+                        if not chunk:
+                            break
+                        data += chunk
+                    head, _, _ = data.partition(b"\r\n\r\n")
+                    headers_raw = head.decode(errors="ignore").split("\r\n")[1:]
+                    headers = {}
+                    for line in headers_raw:
+                        if ":" in line:
+                            k, v = line.split(":", 1)
+                            headers[k.strip().lower()] = v.strip()
+                    result["headers"] = headers
+        # Check some security headers
+        headers = result["headers"]
+        sec_checks = {
+            "hsts": "strict-transport-security" in headers,
+            "csp": "content-security-policy" in headers,
+            "x_frame": "x-frame-options" in headers,
+            "x_xss": "x-xss-protection" in headers,
+            "referrer_policy": "referrer-policy" in headers,
+            "content_type_options": "x-content-type-options" in headers,
+        }
+        result["security_headers_present"] = sec_checks
+        result["secure"] = True
+    except Exception as e:
+        result["error"] = str(e)
+    return result
