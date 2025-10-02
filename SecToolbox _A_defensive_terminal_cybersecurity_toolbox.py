@@ -65,3 +65,27 @@ def arp_scan(network_cidr: str, timeout: float = 2.0) -> List[Dict]:
         return results
     except PermissionError:
         raise RuntimeError("Permission denied: ARP scan requires root privileges.")
+
+def ping_host(ip: str, timeout: float = 1.0) -> bool:
+    
+    try:
+        # Quick TCP probe to port 80 and 443 as liveness indicator
+        for port in (80, 443):
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(timeout)
+                try:
+                    s.connect((ip, port))
+                    return True
+                except Exception:
+                    continue
+    except Exception:
+        pass
+    # As last resort, try system ping
+    import subprocess, platform
+    param = "-n" if platform.system().lower()=="windows" else "-c"
+    cmd = ["ping", param, "1", "-W", str(int(timeout)), ip]
+    try:
+        res = subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        return res.returncode == 0
+    except Exception:
+        return False
