@@ -89,3 +89,42 @@ def ping_host(ip: str, timeout: float = 1.0) -> bool:
         return res.returncode == 0
     except Exception:
         return False
+
+def discover_network(cidr: str, use_arp_first=True) -> List[Dict]:
+    
+    results = []
+    if SCAPY_AVAILABLE and use_arp_first:
+        try:
+            arp = arp_scan(cidr)
+            # Convert to results with alive True
+            for r in arp:
+                results.append({"ip": r["ip"], "mac": r.get("mac"), "alive": True})
+            return results
+        except RuntimeError as e:
+            print("[!] ARP scan failed or not permitted:", str(e))
+    # Fallback to ping sweep (fast threaded)
+    print("[+] Starting ping sweep (fallback)...")
+    net = ipaddress.ip_network(cidr, strict=False)
+    ip_list = [str(ip) for ip in net.hosts()]
+    alive = []
+
+    def _probe(ipaddr):
+        if ping_host(ipaddr, timeout=0.8):
+            return ipaddr
+        return None
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=200) as ex:
+        futures = {ex.submit(_probe, ipaddr): ipaddr for ipaddr in ip_list}
+        for fut in concurrent.futures.as_completed(futures):
+            ipaddr = futures[fut]
+            try:
+                res = fut.result()
+                if res:
+                    alive.append(res)
+            except Exception:
+                continue
+    results = [{"ip": ip, "mac": None, "alive": True} for ip in alive]
+    return results
+
+
+
