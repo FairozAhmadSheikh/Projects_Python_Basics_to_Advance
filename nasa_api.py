@@ -35,4 +35,9 @@ def fetch_space_data():
     except Exception as e:
         print("Error while fetching data:", e)
         return []
-
+# function to nicely display the astronomy facts
+def display_fact(fact):
+    print("\n" + "="*60)
+    slow_print(f"🌠  {fact['title']}")
+    print("="*60)
+    print(f"📅 Date: {fact['date']}\n")
