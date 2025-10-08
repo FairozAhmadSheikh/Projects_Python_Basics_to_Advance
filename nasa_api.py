@@ -19,3 +19,20 @@ def loading_animation(message="Fetching data"):
         sys.stdout.write(f"\r{message} " + animation[i % len(animation)])
         sys.stdout.flush()
     print("\r", end="")
+
+# function to fetch random astronomy data (no API key required)
+def fetch_space_data():
+    # we are using a public mirror of NASA's APOD API
+    url = "https://api.npoint.io/8d51a3c45b29d55bf6c3"  # this contains sample APOD entries
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            return data
+        else:
+            print("Failed to fetch data. Status code:", response.status_code)
+            return []
+    except Exception as e:
+        print("Error while fetching data:", e)
+        return []
+
