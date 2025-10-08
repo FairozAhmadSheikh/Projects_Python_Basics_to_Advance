@@ -59,3 +59,19 @@ def main():
         print("No data available. Try again later.")
         return
     
+    while True:
+        # pick a random astronomy entry
+        import random
+        fact = random.choice(data)
+        display_fact(fact)
+        
+        # ask user for next action
+        user_input = input(" Press [Enter] for another fact or [q] to quit: ").strip().lower()
+        if user_input == "q":
+            slow_print("\n Thanks for exploring the universe with us!")
+            break
+        print("\nLoading new fact...")
+        loading_animation()
+
+if __name__ == "__main__":
+    main()
