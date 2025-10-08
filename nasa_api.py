@@ -40,4 +40,10 @@ def display_fact(fact):
     print("\n" + "="*60)
     slow_print(f"🌠  {fact['title']}")
     print("="*60)
-    print(f"📅 Date: {fact['date']}\n")
+    print(f" Date: {fact['date']}\n")
+
+    wrapped_text = textwrap.fill(fact['explanation'], width=70)
+    slow_print(wrapped_text)
+    
+    print("\n Image URL:", fact['url'])
+    print("="*60 + "\n")
