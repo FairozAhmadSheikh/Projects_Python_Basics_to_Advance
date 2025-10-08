@@ -47,3 +47,15 @@ def display_fact(fact):
     
     print("\n Image URL:", fact['url'])
     print("="*60 + "\n")
+# main CLI interface
+def main():
+    slow_print("🚀 Welcome to SPACE EXPLORER CLI 🌌")
+    slow_print("Fetching random astronomy facts from NASA’s archive...\n")
+    
+    loading_animation()
+    data = fetch_space_data()
+    
+    if not data:
+        print("No data available. Try again later.")
+        return
+    
